@@ -22,9 +22,19 @@
 
         </TextView>
 
+        <Button
+                android:id="@+id/btnMap"
+                android:layout_below="@id/tvHello"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Click"
+                >
+
+        </Button>
+
         <org.osmdroid.views.MapView
                 android:id="@+id/map"
-                android:layout_below="@id/tvHello"
+                android:layout_below="@id/btnMap"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

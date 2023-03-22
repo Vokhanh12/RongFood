@@ -1,13 +1,25 @@
 package com.example.test;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
+import android.location.*;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import org.osmdroid.api.IMapController;
@@ -19,33 +31,52 @@ import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.OverlayItem;
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocationListener{
 
-    private MapView map;
+    MapView map;
+    TextView tvHello;
 
+    Button btnMap1;
+
+   LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        tvHello =(TextView) findViewById(R.id.tvHello);
+        btnMap1 =(Button) findViewById(R.id.btnMap);
+
+        btnMap1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getLocation();
+            }
+        });
+
+
         Configuration.getInstance().load(getApplicationContext(),
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
-        setContentView(R.layout.activity_main);
         map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
-        GeoPoint startPoint = new GeoPoint(10.3596633,106.6773834);
+        GeoPoint startPoint = new GeoPoint(10.3596633, 106.6773834);
         IMapController mapController = map.getController();
         mapController.setZoom(18.0);
         mapController.setCenter(startPoint);
 
         ArrayList<OverlayItem> item = new ArrayList<>();
-        OverlayItem home = new OverlayItem("Cafe","myCafe",new GeoPoint(10.360512,106.677119));
-        OverlayItem storeClick = new OverlayItem("Cua hang","my Cua hang",new GeoPoint(10.360512,106.677119));
 
-        TextView tvHello = findViewById(R.id.tvHello);
+        OverlayItem home = new OverlayItem("Cafe", "myCafe", new GeoPoint(10.360512, 106.677119));
+        OverlayItem storeClick = new OverlayItem("Cua hang", "my Cua hang", new GeoPoint(10.360512, 106.677119));
 
         item.add(home);
         item.add(new OverlayItem("Tiem tap hoa","tiem tap hoa ba on",new GeoPoint(10.3602029,106.6791972)));
@@ -53,10 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 item, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
             @Override
             public boolean onItemSingleTapUp(int index, OverlayItem item) {
-                if(item==home){
-                    tvHello.setText("Hell khanh");
-                    return true;
-                }
 
                 return false;
             }
@@ -69,25 +96,61 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        mOverlay.setFocusItemsOnTap(true);
-        map.getOverlays().add(mOverlay);
+       mOverlay.setFocusItemsOnTap(true);
+       map.getOverlays().add(mOverlay);
+
+        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+        !=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION
+            },100);
+        }
 
 
 
 
     }
 
+    @SuppressLint("MissingPermission")
+    private void getLocation(){
+
+        try {
+            locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,5,MainActivity.this);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+    }
     @Override
     public void onPause() {
 
         super.onPause();
-        map.onPause();;
+
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        map.onResume();
+
     }
 
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        Toast.makeText(this,""+location.getLatitude()+","+location.getLongitude(),Toast.LENGTH_SHORT).show();
+
+        try {
+            Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+            List<Address> addresses =geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+            String address = addresses.get(0).getAddressLine(0);
+
+            tvHello.setText(address);
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        System.out.println(""+location.getLatitude()+","+location.getLongitude());
+    }
 }
