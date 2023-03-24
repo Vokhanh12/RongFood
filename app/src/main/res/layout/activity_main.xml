@@ -11,7 +11,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="24dp">
+
+        </TextView>
+        <TextView
                 android:id="@+id/tvHello"
+                android:layout_below="@+id/tvLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Hello World"

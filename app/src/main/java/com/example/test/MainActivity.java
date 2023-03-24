@@ -2,37 +2,28 @@ package com.example.test;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
 import android.location.*;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
+import com.example.test.GUI.LoginGUI;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
-import org.osmdroid.views.overlay.ItemizedOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.OverlayItem;
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +32,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements LocationListener{
 
     MapView map;
-    TextView tvHello;
+    TextView tvHello,tvLocation;
 
     Button btnMap1;
 
@@ -54,11 +45,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
         tvHello =(TextView) findViewById(R.id.tvHello);
         btnMap1 =(Button) findViewById(R.id.btnMap);
+        tvLocation=(TextView)findViewById(R.id.tvLocation) ;
 
         btnMap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getLocation();
+                Intent intent = new Intent(MainActivity.this, LoginGUI.class);
+                startActivity(intent);
+               // getLocation();
             }
         });
 
@@ -152,5 +146,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         }
 
         System.out.println(""+location.getLatitude()+","+location.getLongitude());
+        tvLocation.setText(""+location.getLatitude()+","+location.getLongitude());
     }
 }
