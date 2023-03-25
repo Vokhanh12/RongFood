@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".GUI.LoginGUI">
+        tools:context=".GUI.Login">
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -28,17 +28,18 @@
                     android:layout_height="50dp"
                     android:src="@drawable/userlogo"
                     android:paddingBottom="5dp" android:layout_alignParentStart="true"
-                    android:layout_marginTop="-13dp">
+                    android:layout_marginTop="-20dp">
 
             </ImageView>
             <TextView
                     android:id="@+id/tvUsername"
                     android:layout_width="100dp"
                     android:layout_height="40dp"
-                    android:text="Username"
+                    android:text="Tài khoản"
                     android:textSize="18dp"
                     android:textColor="@color/white"
                     android:layout_toRightOf="@id/ivUsername"
+
                     android:paddingBottom="10dp">
 
             </TextView>
@@ -49,14 +50,16 @@
                     android:layout_height="40dp"
                     android:textColor="@color/white"
 
+                    android:paddingLeft="50dp"
+
                     app:hintEnabled="false"
                     app:boxStrokeWidth="2dp"
                     app:boxStrokeColor="#FFFFFF"
                     app:backgroundTint="#FFFFFF"
 
-                    android:layout_marginTop="-5dp"
+                    android:layout_marginTop="-12dp"
 
-                    android:textSize="20dp" android:textColorHint="#FFFFFF">
+                    android:textSize="18dp" android:textColorHint="#FFFFFF">
 
             </EditText>
 
@@ -78,7 +81,7 @@
                     android:layout_height="40dp"
                     android:layout_toRightOf="@id/ivPassword"
                     android:paddingTop="5dp"
-                    android:text="Password"
+                    android:text="Mật khẩu"
                     android:textSize="18dp"
                     android:textColor="@color/white"
                     android:layout_below="@+id/tvUsername">
@@ -89,14 +92,18 @@
                     android:id="@+id/etPassword"
                     android:layout_width="275dp"
                     android:layout_height="40dp"
-                    android:paddingTop="10dp"
-                    android:textSize="20dp"
+
+
+                    android:paddingLeft="50dp"
+
+                    android:textSize="18dp"
                     android:textColor="@color/white"
                     app:hintEnabled="false"
                     app:boxStrokeWidth="2dp"
                     app:boxStrokeColor="#FFFFFF"
                     app:backgroundTint="#FFFFFF"
-                    android:layout_below="@id/etUsername" android:textColorHint="#FFFFFF">
+                    android:layout_below="@id/etUsername"
+                    android:layout_marginTop="7dp" android:textColorHint="#FFFFFF" android:password="true">
 
             </EditText>
         </RelativeLayout>

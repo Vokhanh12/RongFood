@@ -15,7 +15,7 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
-import com.example.test.GUI.LoginGUI;
+import com.example.test.GUI.Login;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -24,7 +24,7 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.OverlayItem;
-
+import android.location.LocationListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     TextView tvHello,tvLocation;
 
     Button btnMap1;
-
    LocationManager locationManager;
 
     @Override
@@ -50,11 +49,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         btnMap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, LoginGUI.class);
+                Intent intent = new Intent(MainActivity.this, Login.class);
                 startActivity(intent);
                // getLocation();
             }
         });
+
 
 
         Configuration.getInstance().load(getApplicationContext(),
@@ -148,4 +148,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         System.out.println(""+location.getLatitude()+","+location.getLongitude());
         tvLocation.setText(""+location.getLatitude()+","+location.getLongitude());
     }
+
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        // TODO: handle status changes
+    }
+
 }
