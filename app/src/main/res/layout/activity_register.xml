@@ -9,20 +9,71 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:gravity="center"
+            android:background="#131d38">
         <RelativeLayout
                 android:id="@+id/Container"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_marginTop="100dp"
-                android:gravity="center">
+                android:layout_height="match_parent"
+                android:layout_marginTop="250dp"
+                android:gravity="start">
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                        android:text="Ten dang nhap">
+            <RelativeLayout
+                    android:id="@+id/headerTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đăng ký"
+                        android:textSize="22dp"
+                        android:textColor="@color/white">
 
-            </TextView>
+                </TextView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/headerBottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/headerTop"
+                    android:padding="20dp"
+                    android:gravity="center">
+
+                <TextView
+                        android:id="@+id/tvfristName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Họ và tên đệm"
+                        android:textSize="18dp"
+                        android:textColor="@color/white">
+
+                </TextView>
+
+                <EditText
+                        android:id="@+id/etfristName"
+                        layout_>
+
+                </EditText>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tên"
+                        android:textSize="18dp"
+                        android:textColor="@color/white"
+                        android:layout_toRightOf="@id/tvfristName"
+                        android:paddingLeft="20dp">
+
+                </TextView>
+
+
+            </RelativeLayout>
+
+
+
 
 
 
