@@ -15,7 +15,7 @@
                 android:id="@+id/Container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="250dp"
+                android:layout_marginTop="50dp"
                 android:gravity="start">
 
             <RelativeLayout
@@ -28,7 +28,8 @@
                         android:layout_height="wrap_content"
                         android:text="Đăng ký"
                         android:textSize="22dp"
-                        android:textColor="@color/white">
+                        android:textColor="@color/white"
+                        >
 
                 </TextView>
 
@@ -39,36 +40,213 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/headerTop"
-                    android:padding="20dp"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:scaleX="1.3"
+                    android:scaleY="1.3">
 
+
+                //Dong 1
                 <TextView
                         android:id="@+id/tvfristName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="Họ và tên đệm"
-                        android:textSize="18dp"
-                        android:textColor="@color/white">
+                        android:text="Họ"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="3dp">
+
+                </TextView>
+                
+                <EditText
+                        android:id="@+id/etFristname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/tvfristName"
+
+                        android:layout_alignBottom="@id/tvfristName"
+                        android:layout_alignStart="@id/tvfristName"
+                        android:layout_alignEnd="@id/tvfristName"
+                        android:backgroundTint="@color/white"
+                        >
+
+                </EditText>
+
+               
+
+                <TextView
+                        android:id="@+id/tvLastname"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:text="Tên"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:layout_toRightOf="@id/tvfristName"
+                        android:layout_marginLeft="20dp"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="3dp">
 
                 </TextView>
 
                 <EditText
-                        android:id="@+id/etfristName"
-                        layout_>
+                        android:id="@+id/etLastname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/tvLastname"
+                        android:layout_alignLeft="@+id/tvLastname"
+                        android:layout_alignBottom="@+id/tvLastname"
+                        android:layout_alignRight="@+id/tvLastname"
+                        android:backgroundTint="@color/white">
+
+                </EditText>
+
+
+                //Dong 2
+
+                <TextView
+                        android:id="@+id/tvUsername"
+                        android:layout_width="260dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/etFristname"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:text="Tên đăng nhập"
+                        android:paddingBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="3dp">
+
+                </TextView>
+
+                <EditText
+                        android:id="@+id/etUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/tvUsername"
+                        android:layout_alignStart="@+id/tvUsername"
+                        android:layout_alignBottom="@+id/tvUsername"
+                        android:backgroundTint="@color/white">
+
+                </EditText>
+
+                //dong 3
+                <TextView
+                        android:id="@+id/tvPassword"
+                        android:layout_width="260dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/etUsername"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:text="Mật khẩu"
+                        android:paddingBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="3dp">
+
+                </TextView>
+
+                <EditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/tvPassword"
+                        android:layout_alignStart="@+id/tvPassword"
+                        android:layout_alignBottom="@+id/tvPassword"
+                        android:backgroundTint="@color/white">
+
+                </EditText>
+
+                //dong 4
+
+                <TextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="260dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/etPassword"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:text="Email"
+                        android:paddingBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="3dp">
+
+                </TextView>
+
+                <EditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/tvEmail"
+                        android:layout_alignStart="@+id/tvEmail"
+                        android:layout_alignBottom="@+id/tvEmail"
+                        android:backgroundTint="@color/white"
+                        android:paddingLeft="3dp">
 
                 </EditText>
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tên"
-                        android:textSize="18dp"
+                        android:id="@+id/tvBirthOfday"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:Text="asda"
                         android:textColor="@color/white"
-                        android:layout_toRightOf="@id/tvfristName"
-                        android:paddingLeft="20dp">
+                        android:textSize="30dp"
+                        android:layout_below="@id/etEmail">
 
-                </TextView>
+                 </TextView>
 
+                <Spinner
+                        android:id="@+id/snBirthOfday"
+                        android:layout_width="70dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@id/etEmail"
+
+                        android:background="@drawable/spinner_border"
+                        android:backgroundTint="@color/white"
+
+                        android:spinnerMode="dropdown"
+                        android:layout_toRightOf="@id/tvBirthOfday"
+
+                        android:layout_marginTop="10dp">
+
+                </Spinner>
+
+
+
+                <RadioGroup
+                        android:id="@+id/rgNamNu"
+                        android:layout_width="140dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@+id/etEmail"
+                        android:layout_toRightOf="@+id/snBirthOfday"
+                        android:layout_alignTop="@+id/snBirthOfday"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp">
+
+
+                    <RadioButton
+                            android:id="@+id/rbNam"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nam"
+                            android:textColor="@color/white">
+
+                    </RadioButton>
+
+                    <RadioButton
+                            android:id="@+id/rbNu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nữ"
+                            android:textColor="@color/white">
+
+                    </RadioButton>
+
+
+
+
+
+                </RadioGroup>
 
             </RelativeLayout>
 
