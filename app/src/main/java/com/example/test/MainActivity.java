@@ -15,8 +15,7 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
-import com.example.test.GUI.Login;
-import com.example.test.GUI.Register;
+import com.example.test.Presentation.LoginActivity;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         btnMap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Register.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                // getLocation();
             }

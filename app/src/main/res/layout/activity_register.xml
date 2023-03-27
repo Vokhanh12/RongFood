@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".GUI.Register">
+        tools:context=".Presentation.RegisterActivity">
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,13 +21,13 @@
             <RelativeLayout
                     android:id="@+id/headerTop"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="70dp"
                     android:gravity="center">
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Đăng ký"
-                        android:textSize="22dp"
+                        android:textSize="35dp"
                         android:textColor="@color/white"
                         >
 
@@ -38,11 +38,13 @@
             <RelativeLayout
                     android:id="@+id/headerBottom"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="350dp"
                     android:layout_below="@+id/headerTop"
                     android:gravity="center"
-                    android:scaleX="1.3"
-                    android:scaleY="1.3">
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
+                    android:paddingLeft="15dp"
+                    >
 
 
                 //Dong 1
@@ -186,14 +188,17 @@
 
                 <TextView
                         android:id="@+id/tvBirthOfday"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:Text="asda"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Ngày sinh"
+                        android:textSize="15dp"
                         android:textColor="@color/white"
-                        android:textSize="30dp"
-                        android:layout_below="@id/etEmail">
+                        android:layout_below="@+id/tvEmail"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="8dp"
+                        android:paddingLeft="3dp">
 
-                 </TextView>
+                </TextView>
 
                 <Spinner
                         android:id="@+id/snBirthOfday"
@@ -215,7 +220,7 @@
 
                 <RadioGroup
                         android:id="@+id/rgNamNu"
-                        android:layout_width="140dp"
+                        android:layout_width="130dp"
                         android:layout_height="20dp"
                         android:layout_below="@+id/etEmail"
                         android:layout_toRightOf="@+id/snBirthOfday"
@@ -229,6 +234,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nam"
+                            android:textSize="13dp"
+
                             android:textColor="@color/white">
 
                     </RadioButton>
@@ -238,22 +245,33 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nữ"
+                            android:textSize="13dp"
                             android:textColor="@color/white">
-
                     </RadioButton>
-
-
-
 
 
                 </RadioGroup>
 
+
+        </RelativeLayout>
+
+
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_below="@+id/headerBottom">
+            <Button
+                    android:id="@+id/btnRegister"
+                    android:layout_width="170dp"
+                    android:layout_height="60dp"
+
+                    android:text="Đăng ký">
+
+            </Button>
+
             </RelativeLayout>
-
-
-
-
-
 
         </RelativeLayout>
     </RelativeLayout>

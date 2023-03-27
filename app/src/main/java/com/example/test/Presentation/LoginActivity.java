@@ -1,5 +1,6 @@
-package com.example.test.GUI;
+package com.example.test.Presentation;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.test.R;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     //GUI BUTTON
     private Button btnLogin;
@@ -78,6 +79,21 @@ public class Login extends AppCompatActivity {
 
             }
 
+        });
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+
+                    Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                    startActivity(intent);
+
+
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
         });
 
     }

@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".GUI.Login">
+        tools:context=".Presentation.LoginActivity">
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -19,7 +19,9 @@
                 android:id="@+id/TopLogin"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:scaleX="1.1"
+                android:scaleY="1.1">
 
 
             <ImageView

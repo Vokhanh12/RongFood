@@ -1,13 +1,12 @@
-package com.example.test.GUI;
+package com.example.test.Presentation;
 
-import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.test.R;
 
-public class Register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private RadioGroup rgNamNu;
     private RadioButton rbNam1;
