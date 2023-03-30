@@ -29,14 +29,24 @@
                 android:text="Hello World"
                 android:gravity="center"
                 android:textSize="24sp"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="24dp">
+
+        </TextView>
+
+        <TextView
+                android:id="@+id/tvData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvHello"
+                android:text="Data"
+                android:gravity="center"
+                android:textSize="24sp">
 
         </TextView>
 
         <Button
                 android:id="@+id/btnMap"
-                android:layout_below="@id/tvHello"
+                android:layout_below="@id/tvData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Click"

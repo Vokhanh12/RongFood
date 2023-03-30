@@ -1,5 +1,6 @@
 package com.example.test.Data;
 
+import android.database.Cursor;
 import com.example.test.Model.Account;
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,8 +10,9 @@ import androidx.core.database.sqlite.SQLiteDatabaseKt;
 
 public class AccountDAOImpl extends SQLiteOpenHelper implements AccountDAO{
 
+    private SQLiteDatabase db;
     private static final int DATABASE_VERSION=1;
-    private static final String DATABASE_NAME="rongfood.app";
+    private static final String DATABASE_NAME="rongfood.db";
     private static final String TABLE_ACCOUNTS="Account";
 
     private static final String COLUMN_USERNAME="username";
@@ -36,18 +38,40 @@ public class AccountDAOImpl extends SQLiteOpenHelper implements AccountDAO{
 
 
     @Override
-    public Account getAcccountByUsername(int id) {
-        return null;
+    public Account getAcccountByUsername(String Username) {
+
+        db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_ACCOUNTS, new String[]{COLUMN_USERNAME,
+                        COLUMN_PASSWORD}, COLUMN_USERNAME + "=?",
+                new String[]{Username}, null, null, null, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Account account = new Account(cursor.getString(0),
+                cursor.getString(1));
+
+        cursor.close();
+        db.close();
+
+        return account;
     }
 
     @Override
-    public void addAccount(Account account) {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public boolean addAccount(Account account) {
+         db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
         values.put(COLUMN_USERNAME,account.getUsername());
         values.put(COLUMN_PASSWORD,account.getPassword());
+
+        long result = db.insert(TABLE_ACCOUNTS, null, values);
+
+        db.close();
+
+        return result != -1;
     }
 
     @Override

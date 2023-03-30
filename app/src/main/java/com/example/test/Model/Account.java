@@ -3,11 +3,12 @@ package com.example.test.Model;
 public class Account {
 
     private int id;
-    private String Username;
-    private String Password;
+    private String username;
+    private String password;
 
-    public Account(){
-
+    public Account(String Username,String Password){
+        this.username=Username;
+        this.password=Password;
     }
 
     public int getId() {
@@ -15,11 +16,12 @@ public class Account {
     }
 
     public String getPassword() {
-        return Password;
+
+        return password;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setId(int id) {
@@ -27,10 +29,10 @@ public class Account {
     }
 
     public void setPassword(String password) {
-        Password = password;
+        password = password;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        username = username;
     }
 }

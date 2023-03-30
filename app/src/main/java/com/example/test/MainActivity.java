@@ -15,6 +15,9 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
+import com.example.test.Data.AccountDAO;
+import com.example.test.Data.AccountDAOImpl;
+import com.example.test.Model.Account;
 import com.example.test.Presentation.LoginActivity;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -32,10 +35,17 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements LocationListener{
 
     MapView map;
-    TextView tvHello,tvLocation;
+    TextView tvHello,tvLocation,tvData;
 
     Button btnMap1;
    LocationManager locationManager;
+
+    AccountDAO accountDAO;
+
+    Account account1 = new Account("Admin","Admin@123");
+    Account account2 = new Account("khanhyou2018","123456");
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +54,24 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
         tvHello =(TextView) findViewById(R.id.tvHello);
         btnMap1 =(Button) findViewById(R.id.btnMap);
-        tvLocation=(TextView)findViewById(R.id.tvLocation) ;
+        tvLocation=(TextView)findViewById(R.id.tvLocation);
+        tvData=(TextView)findViewById(R.id.tvData);
+
+        accountDAO = new AccountDAOImpl(this);
+
+        accountDAO.addAccount(account1);
+        accountDAO.addAccount(account2);
 
         btnMap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                // Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+               // startActivity(intent);
                // getLocation();
+
+                Account account1View = accountDAO.getAcccountByUsername("Admin");
+
+                tvData.setText(""+account1View.getPassword().toString());
             }
         });
 
@@ -99,6 +119,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
                     Manifest.permission.ACCESS_FINE_LOCATION
             },100);
         }
+
+
+
+
+
 
 
 
