@@ -67,11 +67,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
             public void onClick(View view) {
                 // Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                // startActivity(intent);
-               // getLocation();
+                getLocation();
 
-                Account account1View = accountDAO.getAcccountByUsername("Admin");
+                //Account account1View = accountDAO.getAcccountByUsername("Admin");
 
-                tvData.setText(""+account1View.getPassword().toString());
+                //tvData.setText(""+account1View.getPassword().toString());
             }
         });
 
