@@ -18,7 +18,7 @@ import androidx.preference.PreferenceManager;
 import com.example.test.Data.AccountDAO;
 import com.example.test.Data.AccountDAOImpl;
 import com.example.test.Model.Account;
-import com.example.test.Presentation.LoginActivity;
+import com.example.test.Presentation.Dashbroad.DashbroadActivity;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -59,15 +59,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
         accountDAO = new AccountDAOImpl(this);
 
-        accountDAO.addAccount(account1);
-        accountDAO.addAccount(account2);
+        //accountDAO.addAccount(account1);
+       // accountDAO.addAccount(account2);
 
         btnMap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-               // startActivity(intent);
-                getLocation();
+                Intent intent = new Intent(MainActivity.this, DashbroadActivity.class);
+                startActivity(intent);
+               //getLocation();
 
                 //Account account1View = accountDAO.getAcccountByUsername("Admin");
 
@@ -135,7 +135,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
         try {
             locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,5,MainActivity.this);
+            long startTime = System.currentTimeMillis();
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, MainActivity.this);
+            long endTime = System.currentTimeMillis();
+            long duration = endTime - startTime;
+            Toast.makeText(this, "Time taken to get location: " + duration + "ms", Toast.LENGTH_SHORT).show();
         }catch (Exception ex){
             ex.printStackTrace();
         }
