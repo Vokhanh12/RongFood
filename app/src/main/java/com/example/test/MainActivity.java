@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, DashbroadActivity.class);
                 startActivity(intent);
-               //getLocation();
+              // getLocation();
 
                 //Account account1View = accountDAO.getAcccountByUsername("Admin");
 
@@ -139,12 +139,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, MainActivity.this);
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
-            Toast.makeText(this, "Time taken to get location: " + duration + "ms", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Time taken to get location: " + duration + "ms", Toast.LENGTH_SHORT).show();
         }catch (Exception ex){
             ex.printStackTrace();
         }
 
     }
+
     @Override
     public void onPause() {
 

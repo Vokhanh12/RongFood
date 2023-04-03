@@ -54,6 +54,7 @@
 
         </Button>
 
+
         <org.osmdroid.views.MapView
                 android:id="@+id/map"
                 android:layout_below="@id/btnMap"
