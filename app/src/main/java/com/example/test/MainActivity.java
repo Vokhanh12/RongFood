@@ -31,6 +31,8 @@ import android.location.LocationListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 
 public class MainActivity extends AppCompatActivity implements LocationListener{
 
@@ -121,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         }
 
 
-
+        FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(MainActivity.this);
 
 
 

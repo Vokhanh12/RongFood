@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "171964383809",
+    "project_id": "rongfood-c701f",
+    "storage_bucket": "rongfood-c701f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171964383809:android:87d64193b95fe61a5ebcc0",
+        "android_client_info": {
+          "package_name": "com.example.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171964383809-pmdjm03mfivug6sotvu4apg6m9ev0ldu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.test",
+            "certificate_hash": "2761f8a0c2fa5790bdeb9645ce17f0d175e12b1f"
+          }
+        },
+        {
+          "client_id": "171964383809-5uqdg37v1g1ih3ot52jo1rvscn772ge3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe0dYAoCq-9HoPpXbQIS6glJrqfmbgydw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171964383809-5uqdg37v1g1ih3ot52jo1rvscn772ge3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
