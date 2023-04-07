@@ -19,6 +19,8 @@ import com.example.test.Data.AccountDAO;
 import com.example.test.Data.AccountDAOImpl;
 import com.example.test.Model.Account;
 import com.example.test.Presentation.Dashbroad.DashbroadActivity;
+import com.example.test.Presentation.LoginActivity;
+import com.example.test.Presentation.RegisterActivity;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         btnMap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DashbroadActivity.class);
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(intent);
               // getLocation();
 
@@ -123,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         }
 
 
+        //firebase
         FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(MainActivity.this);
 
 
