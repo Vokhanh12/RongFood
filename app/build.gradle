@@ -44,4 +44,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:17.0.0'
     implementation 'com.google.firebase:firebase-auth:21.2.0'
 
+    //API Directions https://openrouteservice.org/dev/#/api-docs/v2/directions/{profile}/get
+    implementation 'org.glassfish.jersey.core:jersey-client:2.8'
+    implementation 'org.glassfish.jersey.media:jersey-media-json-jackson:2.8'
+
+
+
 }

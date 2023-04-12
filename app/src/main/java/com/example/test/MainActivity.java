@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         btnMap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(MainActivity.this, DashbroadActivity.class);
                 startActivity(intent);
               // getLocation();
 
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
+        //Điểm start Point
         GeoPoint startPoint = new GeoPoint(10.3596633, 106.6773834);
         IMapController mapController = map.getController();
         mapController.setZoom(18.0);
