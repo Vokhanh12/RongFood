@@ -5,13 +5,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.*;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
@@ -19,9 +20,9 @@ import com.example.test.Data.AccountDAO;
 import com.example.test.Data.AccountDAOImpl;
 import com.example.test.Model.Account;
 import com.example.test.Presentation.Dashbroad.DashbroadActivity;
-import com.example.test.Presentation.LoginActivity;
-import com.example.test.Presentation.RegisterActivity;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import org.osmdroid.api.IMapController;
+import org.osmdroid.bonuspack.routing.*;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
@@ -29,11 +30,19 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.OverlayItem;
-import android.location.LocationListener;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import com.google.firebase.analytics.FirebaseAnalytics;
+
+
+import org.osmdroid.api.IMapController;
+import org.osmdroid.bonuspack.routing.OSRMRoadManager;
+import org.osmdroid.bonuspack.routing.Road;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Polyline;
 
 
 public class MainActivity extends AppCompatActivity implements LocationListener{
@@ -50,11 +59,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     Account account2 = new Account("khanhyou2018","123456");
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         tvHello =(TextView) findViewById(R.id.tvHello);
         btnMap1 =(Button) findViewById(R.id.btnMap);
@@ -129,6 +138,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         //firebase
         FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(MainActivity.this);
 
+        GeoPoint startPoint1 = new GeoPoint(10.762622, 106.660172);
+        GeoPoint endPoint1 = new GeoPoint(10.767030, 106.654481);
+
+
+
+
+
 
 
 
@@ -189,6 +205,37 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
         // TODO: handle status changes
+    }
+
+    private class RoadManagerTask extends AsyncTask<ArrayList<GeoPoint>, Void, Road> {
+
+        @Override
+        protected Road doInBackground(ArrayList<GeoPoint>... params) {
+            GeoPoint startPoint = new GeoPoint(10.762622, 106.660172);
+            GeoPoint endPoint = new GeoPoint(10.767030, 106.654481);
+
+            String userAgent = System.getProperty("http.agent");
+            ArrayList<GeoPoint> waypoints = new ArrayList<>();
+            RoadManager roadManager = new OSRMRoadManager(MainActivity.this,userAgent);
+
+
+            waypoints.add(startPoint);
+            waypoints.add(endPoint);
+            Road road = roadManager.getRoad(waypoints);
+
+            // Hiển thị đường đi trên bản đồ
+            Polyline roadOverlay = RoadManager.buildRoadOverlay(road);
+            map.getOverlays().add(roadOverlay);
+            map.invalidate();
+
+
+            return roadManager.getRoad(waypoints);
+        }
+
+        @Override
+        protected void onPostExecute(Road road) {
+            // Update UI with road data
+        }
     }
 
 }
