@@ -2,6 +2,7 @@ package com.example.test;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.*;
@@ -34,6 +35,7 @@ import org.osmdroid.views.overlay.OverlayItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.DoubleToIntFunction;
 
 
 import org.osmdroid.api.IMapController;
@@ -138,8 +140,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         //firebase
         FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(MainActivity.this);
 
-        GeoPoint startPoint1 = new GeoPoint(10.762622, 106.660172);
-        GeoPoint endPoint1 = new GeoPoint(10.767030, 106.654481);
+
+        // Usage
+        ArrayList<GeoPoint> waypoints = new ArrayList<>();
+        waypoints.add(new GeoPoint(10.360512, 106.677119)); // Start point
+        waypoints.add(new GeoPoint(10.3602029,106.6791972)); // End point
+
+        RoadManagerTask roadManagerTask = new RoadManagerTask();
+        roadManagerTask.execute(waypoints);
 
 
 
@@ -211,30 +219,32 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
         @Override
         protected Road doInBackground(ArrayList<GeoPoint>... params) {
-            GeoPoint startPoint = new GeoPoint(10.762622, 106.660172);
-            GeoPoint endPoint = new GeoPoint(10.767030, 106.654481);
+
 
             String userAgent = System.getProperty("http.agent");
-            ArrayList<GeoPoint> waypoints = new ArrayList<>();
+            ArrayList<GeoPoint> waypoints = params[0];
             RoadManager roadManager = new OSRMRoadManager(MainActivity.this,userAgent);
 
-
-            waypoints.add(startPoint);
-            waypoints.add(endPoint);
-            Road road = roadManager.getRoad(waypoints);
-
-            // Hiển thị đường đi trên bản đồ
-            Polyline roadOverlay = RoadManager.buildRoadOverlay(road);
-            map.getOverlays().add(roadOverlay);
-            map.invalidate();
-
-
             return roadManager.getRoad(waypoints);
+
+
         }
 
         @Override
         protected void onPostExecute(Road road) {
             // Update UI with road data
+            // Draw the road on the map
+            Polyline roadOverlay = RoadManager.buildRoadOverlay(road);
+            roadOverlay.setWidth(20f);
+            map.getOverlays().add(roadOverlay);
+            map.invalidate();
+
+
+            double lengthInMeters = roadOverlay.getDistance();
+
+            tvHello.setText((int)lengthInMeters+" Mét");
+
+
         }
     }
 
