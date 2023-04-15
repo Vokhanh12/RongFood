@@ -6,9 +6,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import androidx.core.database.sqlite.SQLiteDatabaseKt;
 
-public class AccountDAOImpl extends SQLiteOpenHelper implements AccountDAO{
+public class AccountDAOImpl_SQLite extends SQLiteOpenHelper implements AccountDAO{
 
     private SQLiteDatabase db;
     private static final int DATABASE_VERSION=1;
@@ -18,7 +17,7 @@ public class AccountDAOImpl extends SQLiteOpenHelper implements AccountDAO{
     private static final String COLUMN_USERNAME="username";
     private static final String COLUMN_PASSWORD="password";
 
-    public AccountDAOImpl(Context context){
+    public AccountDAOImpl_SQLite(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
     }
 
@@ -64,7 +63,7 @@ public class AccountDAOImpl extends SQLiteOpenHelper implements AccountDAO{
 
         ContentValues values = new ContentValues();
 
-        values.put(COLUMN_USERNAME,account.getUsername());
+      //  values.put(COLUMN_USERNAME,account.getUsername());
         values.put(COLUMN_PASSWORD,account.getPassword());
 
         long result = db.insert(TABLE_ACCOUNTS, null, values);

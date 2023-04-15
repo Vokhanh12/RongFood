@@ -21,7 +21,9 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
+import com.example.test.Data.AccountDAOimpl_Firestore;
 import com.example.test.MainActivity;
+import com.example.test.Model.Account;
 import com.example.test.R;
 import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
@@ -61,6 +63,9 @@ public class DashbroadActivity extends AppCompatActivity implements LocationList
 
     private double Latitude,Longitude;
     private MapView map;
+
+
+    Account account = new Account("khanhyou2024@gmail.com","abc@123");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +126,14 @@ public class DashbroadActivity extends AppCompatActivity implements LocationList
 
 
         OpenMap();
+
+
+        AccountDAOimpl_Firestore accountDAOimplFirestore = new AccountDAOimpl_Firestore(this);
+
+
+        //Đăng ký tài khoảng
+        //accountDAOimplFirestore.addAccount(account);
+
 
 
     }

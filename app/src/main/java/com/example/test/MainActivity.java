@@ -2,7 +2,6 @@ package com.example.test;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.*;
@@ -18,9 +17,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 import com.example.test.Data.AccountDAO;
-import com.example.test.Data.AccountDAOImpl;
+import com.example.test.Data.AccountDAOImpl_SQLite;
 import com.example.test.Model.Account;
 import com.example.test.Presentation.Dashbroad.DashbroadActivity;
+import com.example.test.Presentation.LoginActivity;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.routing.*;
@@ -35,15 +35,10 @@ import org.osmdroid.views.overlay.OverlayItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.function.DoubleToIntFunction;
 
 
-import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.routing.OSRMRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
 
 
@@ -53,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     TextView tvHello,tvLocation,tvData;
 
     Button btnMap1;
-   LocationManager locationManager;
+    LocationManager locationManager;
 
     AccountDAO accountDAO;
 
@@ -72,16 +67,18 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         tvLocation=(TextView)findViewById(R.id.tvLocation);
         tvData=(TextView)findViewById(R.id.tvData);
 
-        accountDAO = new AccountDAOImpl(this);
+        accountDAO = new AccountDAOImpl_SQLite(this);
 
         //accountDAO.addAccount(account1);
-       // accountDAO.addAccount(account2);
+        //accountDAO.addAccount(account2);
 
         btnMap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, DashbroadActivity.class);
                 startActivity(intent);
+                //Kết thúc form cũ
+                finish();
               // getLocation();
 
                 //Account account1View = accountDAO.getAcccountByUsername("Admin");
@@ -113,10 +110,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<>(getApplicationContext(),
                 item, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
             @Override
-            public boolean onItemSingleTapUp(int index, OverlayItem item) {
-
-                return false;
-            }
+            public boolean onItemSingleTapUp(int index, OverlayItem item) {return false;}
 
             @Override
             public boolean onItemLongPress(int index, OverlayItem item) {

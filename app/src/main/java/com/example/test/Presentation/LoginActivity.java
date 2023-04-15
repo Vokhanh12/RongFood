@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 String username = etUsername.getText().toString();
                 String password = etUserPassword.getText().toString();
 
+                //Kiểm tra username và password có rổng hay không
                 if(TextUtils.isEmpty(username)){
                     Toast.makeText(LoginActivity.this,"Vui long nhap lai ten dang nhap!",Toast.LENGTH_SHORT).show();
                     return;
@@ -91,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                         else{
                             Toast.makeText(getApplicationContext(),"Dang nhap that bai",Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 });
 
