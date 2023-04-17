@@ -22,13 +22,15 @@
             android:usesCleartextTraffic="true"
             tools:targetApi="31">
         <activity
+                android:name=".Presentation.Dashbroad_Map.Dashbroad_MapActivity"
+                android:exported="false"/>
+        <activity
                 android:name=".Presentation.Dashbroad.HomeFragment"
                 android:exported="false">
             <meta-data
                     android:name="android.app.lib_name"
                     android:value=""/>
         </activity>
-
         <activity
                 android:name=".Presentation.Dashbroad.DashbroadActivity"
                 android:exported="false"
@@ -38,7 +40,6 @@
                     android:name="android.app.lib_name"
                     android:value=""/>
         </activity>
-
         <activity
                 android:name=".Presentation.RegisterActivity"
                 android:exported="false">

@@ -2,12 +2,8 @@ package com.example.test.Presentation.Dashbroad;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.location.*;
-import android.net.wifi.p2p.WifiP2pManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -19,10 +15,9 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
-import com.example.test.Data.AccountDAOimpl_Firestore;
-import com.example.test.MainActivity;
+import com.example.test.Data.AccountDAOimpl_FireAuth;
+import com.example.test.Data.LocationDAOimpl_Firestore;
 import com.example.test.Model.Account;
 import com.example.test.R;
 import com.google.android.material.navigation.NavigationView;
@@ -65,7 +60,7 @@ public class DashbroadActivity extends AppCompatActivity implements LocationList
     private MapView map;
 
 
-    Account account = new Account("khanhyou2024@gmail.com","abc@123");
+    //Account account = new Account("khanhyou2024@gmail.com","abc@123");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,16 +119,19 @@ public class DashbroadActivity extends AppCompatActivity implements LocationList
             }
         });
 
+        //Load map
+        //OpenMap();
 
-        OpenMap();
 
-
-        AccountDAOimpl_Firestore accountDAOimplFirestore = new AccountDAOimpl_Firestore(this);
+        AccountDAOimpl_FireAuth accountDAOimplFirestore = new AccountDAOimpl_FireAuth(this);
 
 
         //Đăng ký tài khoảng
         //accountDAOimplFirestore.addAccount(account);
-
+        //Thêm vào Firestore Database
+      //  com.example.test.Model.Location location1 = new com.example.test.Model.Location(10.3602029,106.6791972);
+       // LocationDAOimpl_Firestore locationDAOimplFirestore = new LocationDAOimpl_Firestore(this);
+       // locationDAOimplFirestore.addLocation(location1);
 
 
     }

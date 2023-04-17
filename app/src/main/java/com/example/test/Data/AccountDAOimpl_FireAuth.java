@@ -8,18 +8,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import org.jetbrains.annotations.NotNull;
 
 import android.content.Context;
 
 
-public class AccountDAOimpl_Firestore implements AccountDAO {
+public class AccountDAOimpl_FireAuth implements AccountDAO {
 
     private FirebaseAuth mAuth;
     private Context mContext;
 
-    public AccountDAOimpl_Firestore(Context context){
+    public AccountDAOimpl_FireAuth(Context context){
         this.mContext=context;
         this.mAuth = FirebaseAuth.getInstance();
     }

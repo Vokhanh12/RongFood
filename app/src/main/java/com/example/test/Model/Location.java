@@ -1,22 +1,27 @@
 package com.example.test.Model;
 
 public class Location {
-    private double Latitude;
-    private double Longitude;
+    private double latitude;
+    private double longitude;
+
+    public Location(double Latitude,double Longitude){
+        this.latitude=Latitude;
+        this.longitude=Longitude;
+    }
 
     public double getLatitude() {
-        return Latitude;
+        return latitude;
     }
 
     public double getLongitude() {
-        return Longitude;
+        return longitude;
     }
 
     public void setLatitude(double latitude) {
-        Latitude = latitude;
+        latitude = latitude;
     }
 
     public void setLongitude(double longitude) {
-        Longitude = longitude;
+        longitude = longitude;
     }
 }
