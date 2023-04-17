@@ -23,7 +23,9 @@
             tools:targetApi="31">
         <activity
                 android:name=".Presentation.Dashbroad_Map.Dashbroad_MapActivity"
-                android:exported="false"/>
+                android:exported="false"
+                android:label="helloworld"
+                android:theme="@style/Theme.Test.FullScreen.NoActionBar"/>
         <activity
                 android:name=".Presentation.Dashbroad.HomeFragment"
                 android:exported="false">

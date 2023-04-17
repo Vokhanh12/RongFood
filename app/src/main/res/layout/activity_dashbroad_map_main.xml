@@ -8,6 +8,9 @@
         android:layout_height="match_parent"
         tools:context=".Presentation.Dashbroad_Map.Dashbroad_MapActivity">
 
+
+
+
     <FrameLayout
             android:id="@+id/main_content"
             android:layout_width="match_parent"
@@ -42,30 +45,53 @@
                     app:queryBackground="@null"
                     app:submitBackground="@null"
                     app:queryHint="Tim kiem" />
-
-
-
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_viewImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:overScrollMode="always"
+                    android:orientation="horizontal"
+                    app:spanCount="4"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_alignParentEnd="true" android:layout_alignParentTop="true"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginTop="55dp"/>
 
 
         </RelativeLayout>
 
     </FrameLayout>
 
-    <RelativeLayout
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="bottom">
 
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+                android:id="@+id/recycler_viewIcon"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="16dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2"/>
 
-    </RelativeLayout>
+    </LinearLayout>
+
+
 
     <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"
@@ -74,6 +100,7 @@
             android:layout_gravity="start"
             android:background="@color/white"
             app:menu="@menu/drawer_menu" />
+
 
 
 

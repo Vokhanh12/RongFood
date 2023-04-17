@@ -6,15 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.test.R;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class MyAdapterIcon extends RecyclerView.Adapter<MyAdapterIcon.MyViewHolder> {
 
     private List<Icon> iconList;
     private OnItemClickListener listener;
@@ -23,10 +21,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         void onItemClick(int position);
     }
 
-    public MyAdapter(List<Icon> iconList, OnItemClickListener listener) {
+    public MyAdapterIcon(List<Icon> iconList, OnItemClickListener listener) {
         this.iconList = iconList;
         this.listener = listener;
     }
+
 
     @NonNull
     @Override
@@ -54,7 +53,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public MyViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.icon);
+            imageView = itemView.findViewById(R.id.iconTrangchu);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -66,5 +65,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 }
             });
         }
+
+
     }
 }
