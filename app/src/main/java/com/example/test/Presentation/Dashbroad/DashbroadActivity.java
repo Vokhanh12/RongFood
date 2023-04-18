@@ -3,6 +3,7 @@ package com.example.test.Presentation.Dashbroad;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 
+import android.widget.SearchView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -21,12 +22,17 @@ public class DashbroadActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewIcon;
     private RecyclerView recyclerViewImage;
+
+    private SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashbroad_main);
 
 
+        searchView = findViewById(R.id.search);
+
+        //Khu khởi tạo
         recyclerViewIcon = findViewById(R.id.recycler_viewIcon);
         recyclerViewIcon.setLayoutManager(new GridLayoutManager(this, 4));
 
@@ -39,6 +45,8 @@ public class DashbroadActivity extends AppCompatActivity {
         iconList.add(Icon.createWithResource(this, R.drawable.buy));
         iconList.add(Icon.createWithResource(this, R.drawable.notification));
 
+
+        //Xử lý Cick Icon
         MyAdapterIcon adapterIcon = new MyAdapterIcon(iconList, new MyAdapterIcon.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -82,13 +90,29 @@ public class DashbroadActivity extends AppCompatActivity {
                 // Xử lý khi người dùng click vào một item
             }
         });
+        recyclerViewImage.scrollToPosition(1);
         recyclerViewImage.setAdapter(adapterImage);
 
 
-        Store store = new Store("ST01","Nguyen Vo Khanh","RongFood",new Location(10.0001,12.0001));
+        //Khu xử lý
+        Store store = new Store("ST02","Nguyen Vo Khanh khanh 1","RongFood",new Location(10.0001,12.0001));
+        Store store1 = new Store("ST03","Nguyễn Văn B","Quán Cơm - Hủ Tiếu Cà Râu",new Location(10.4238216,106.3292482));
+        Store store2 = new Store("ST04","Nguyễn Văn C","Cafe võng KT",new Location(10.4236335,106.329828));
+        Store store3 = new Store("ST05","Nguyễn Văn D","Sun Coffee",new Location(10.4239236,106.32756));
+        Store store4 = new Store("ST06","Nguyễn Văn F","Cơm tấm Kiều Giang",new Location(10.4241077,106.3220485));
+        Store store5 = new Store("ST07","Nguyễn Văn G","Quán Ăn Hùng Duy",new Location(10.4241077,106.3220485));
         StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(this);
 
-        storeDAOimplFirestore.addStore(store);
+       // storeDAOimplFirestore.addStore(store1);
+       // storeDAOimplFirestore.addStore(store2);
+       // storeDAOimplFirestore.addStore(store3);
+       // storeDAOimplFirestore.addStore(store4);
+       // storeDAOimplFirestore.addStore(store5);
+      //  storeDAOimplFirestore.updateStore(store,"VVGj9go0v9fgowP0Vaz9");
+
+
+
+
 
     }
 

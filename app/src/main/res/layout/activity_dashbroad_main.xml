@@ -60,18 +60,22 @@
                     android:layout_marginEnd="0dp"
                     android:layout_marginTop="55dp"/>
 
+            <ListView
+                    android:id="@+id/listnameFood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/search">
+
+            </ListView>
+
 
         </RelativeLayout>
 
+
+
     </FrameLayout>
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
 
-    </LinearLayout>
 
 
 

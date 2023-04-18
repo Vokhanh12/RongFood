@@ -24,4 +24,10 @@ public class Location {
     public void setLongitude(double longitude) {
         _longitude = longitude;
     }
+
+
+    @Override
+    public String toString(){
+        return "Latitude:"+this._latitude+" Longitude:"+this._longitude;
+    }
 }
