@@ -1,9 +1,8 @@
-package com.example.test.Presentation.Dashbroad;
+package com.example.test.Presentation.DashbroadMap;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import com.example.test.R;

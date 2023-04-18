@@ -1,268 +1,102 @@
 package com.example.test.Presentation.Dashbroad;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.pm.PackageManager;
-import android.location.*;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.widget.*;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.preference.PreferenceManager;
-import com.example.test.Data.AccountDAOimpl_FireAuth;
-import com.example.test.Data.LocationDAOimpl_Firestore;
-import com.example.test.Model.Account;
+
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.test.Data.StoreDAO.StoreDAOimpl_Firestore;
+import com.example.test.Model.Location;
+import com.example.test.Model.Store;
 import com.example.test.R;
-import com.google.android.material.navigation.NavigationView;
-import org.jetbrains.annotations.NotNull;
-import androidx.core.view.GravityCompat;
-import org.osmdroid.api.IMapController;
-import org.osmdroid.config.Configuration;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.ItemizedIconOverlay;
-import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
-import org.osmdroid.views.overlay.OverlayItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
+public class DashbroadActivity extends AppCompatActivity {
 
-
-
-
-
-public class DashbroadActivity extends AppCompatActivity implements LocationListener {
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private FrameLayout frameLayout;
-    private TextView tvTest1;
-
-    private ActionBarDrawerToggle mDrawerToggle;
-    private SearchView searchView;
-
-    private TextView tvLocation;
-    private TextView tvAddress;
-
-    private LocationManager locationManager;
-
-
-    private double Latitude,Longitude;
-    private MapView map;
-
-
-    //Account account = new Account("khanhyou2024@gmail.com","abc@123");
-
+    private RecyclerView recyclerViewIcon;
+    private RecyclerView recyclerViewImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_dashbroad);
+        setContentView(R.layout.activity_dashbroad_main);
 
 
-        tvLocation = findViewById(R.id.tvLocation);
-        tvAddress = findViewById(R.id.tvAddress);
+        recyclerViewIcon = findViewById(R.id.recycler_viewIcon);
+        recyclerViewIcon.setLayoutManager(new GridLayoutManager(this, 4));
 
+        recyclerViewImage = findViewById(R.id.recycler_viewImage);
+        recyclerViewImage.setLayoutManager(new GridLayoutManager(this,4));
 
-        drawerLayout = findViewById(R.id.drawer_layout);
+        List<Icon> iconList = new ArrayList<>();
+        iconList.add(Icon.createWithResource(this, R.drawable.home));
+        iconList.add(Icon.createWithResource(this, R.drawable.hot));
+        iconList.add(Icon.createWithResource(this, R.drawable.buy));
+        iconList.add(Icon.createWithResource(this, R.drawable.notification));
 
-        // Khởi tạo NavigationView
-        navigationView = findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        MyAdapterIcon adapterIcon = new MyAdapterIcon(iconList, new MyAdapterIcon.OnItemClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-                // Xử lý sự kiện khi người dùng chọn một mục trong menu
-                switch (item.getItemId()) {
-                    case R.id.home:
-                        // Mở fragment HomeFragment
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_content, new HomeFragment()).commit();
+            public void onItemClick(int position) {
+                // xử lý sự kiện click trên item
+
+                switch (position){
+                    case 0:
+                        Toast.makeText(DashbroadActivity.this,"icon 1",Toast.LENGTH_SHORT).show();
                         break;
-                   /* case R.id.settings:
-                        // Mở fragment SettingsFragment
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_content, new SettingsFragment()).commit();
+                    case 1:
+                        Toast.makeText(DashbroadActivity.this,"icon 2",Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.help:
-                        // Mở fragment HelpFragment
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_content, new HelpFragment()).commit();
+                    case 2:
+                        break;
+                    case 3:
                         break;
 
-                    */
                 }
 
-                // Đóng DrawerLayout
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                return true;
-            }
-
-        });
-
-
-        // Tìm nút Button trong NavigationView
-        Button homeButton = findViewById(R.id.btnMenu);
-
-
-        frameLayout = findViewById(R.id.main_content);
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-
-        //Load map
-        //OpenMap();
+        recyclerViewIcon.setAdapter(adapterIcon);
 
 
-        AccountDAOimpl_FireAuth accountDAOimplFirestore = new AccountDAOimpl_FireAuth(this);
+
+        // Khởi tạo RecyclerView
+        recyclerViewImage = findViewById(R.id.recycler_viewImage);
+        recyclerViewImage.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        // Khởi tạo MyAdapterImage và gán cho RecyclerView
+        List<String> imageUrlList = new ArrayList<>();
+        imageUrlList.add("https://vegafood.vn/storage/2022/02/939/mceu-67729456761643952103913.png");
+        imageUrlList.add("https://capherangxay.vn/wp-content/uploads/2020/04/Co-nen-kinh-doanh-do-uong-online-3.jpg");
+        imageUrlList.add("https://statics.vinpearl.com/quan-nuong-ngon-o-sai-gon-3%20(1)_1634616272.png");
 
 
-        //Đăng ký tài khoảng
-        //accountDAOimplFirestore.addAccount(account);
-        //Thêm vào Firestore Database
-      //  com.example.test.Model.Location location1 = new com.example.test.Model.Location(10.3602029,106.6791972);
-       // LocationDAOimpl_Firestore locationDAOimplFirestore = new LocationDAOimpl_Firestore(this);
-       // locationDAOimplFirestore.addLocation(location1);
 
-
-    }
-
-    public void OpenMap(){
-
-
-        Configuration.getInstance().load(getApplicationContext(),
-                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
-        map = findViewById(R.id.map);
-        map.setTileSource(TileSourceFactory.MAPNIK);
-        map.setBuiltInZoomControls(true);
-        GeoPoint startPoint = new GeoPoint(10.425447,106.3289527);
-        IMapController mapController = map.getController();
-        mapController.setZoom(18.0);
-        mapController.setCenter(startPoint);
-
-        ArrayList<OverlayItem> item = new ArrayList<>();
-
-        OverlayItem home = new OverlayItem("Cafe", "myCafe", new GeoPoint(10.360512, 106.677119));
-        OverlayItem storeClick = new OverlayItem("Cua hang", "my Cua hang", new GeoPoint(10.360512, 106.677119));
-
-        item.add(home);
-        item.add(new OverlayItem("Tiem tap hoa","tiem tap hoa ba on",new GeoPoint(10.3602029,106.6791972)));
-        ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<>(getApplicationContext(),
-                item, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+        MyAdapterImage adapterImage = new MyAdapterImage(imageUrlList, new MyAdapterImage.OnItemClickListener() {
             @Override
-            public boolean onItemSingleTapUp(int index, OverlayItem item) {
-
-                return false;
+            public void onItemClick(int position) {
+                // Xử lý khi người dùng click vào một item
             }
-
-            @Override
-            public boolean onItemLongPress(int index, OverlayItem item) {
-                return false;
-            }
-
-
         });
-
-        mOverlay.setFocusItemsOnTap(true);
-        map.getOverlays().add(mOverlay);
-
-        if(ContextCompat.checkSelfPermission(DashbroadActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(DashbroadActivity.this,new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION
-            },100);
-        }
+        recyclerViewImage.setAdapter(adapterImage);
 
 
+        Store store = new Store("ST01","Nguyen Vo Khanh","RongFood",new Location(10.0001,12.0001));
+        StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(this);
 
-
-        setLocation(mapController);
-
-
-
-
-    }
-
-    public void setLocation(IMapController mapController){
-        try {
-
-            GeoPoint myLocation = new GeoPoint(Latitude,Longitude);
-            mapController.setCenter(myLocation);
-
-
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    private void getLocation(){
-
-        try {
-            locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
-            long startTime = System.currentTimeMillis();
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, DashbroadActivity.this);
-            long endTime = System.currentTimeMillis();
-            long duration = endTime - startTime;
-            // Toast.makeText(this, "Time taken to get location: " + duration + "ms", Toast.LENGTH_SHORT).show();
-
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-
-    }
-
-    @Override
-    public void onPause() {
-
-        super.onPause();
-
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
+        storeDAOimplFirestore.addStore(store);
 
     }
 
 
-    @Override
-    public void onLocationChanged(@NonNull Location location) {
-
-        this.Latitude = location.getLatitude();
-        this.Longitude= location.getLongitude();
-
-        Toast.makeText(this,""+location.getLatitude()+","+location.getLongitude(),Toast.LENGTH_SHORT).show();
-
-        try {
-            Geocoder geocoder = new Geocoder(DashbroadActivity.this, Locale.getDefault());
-            List<Address> addresses =geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-            String address = addresses.get(0).getAddressLine(0);
-
-            tvAddress.setText(address);
-
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-
-        System.out.println(""+location.getLatitude()+","+location.getLongitude());
-        tvLocation.setText(""+location.getLatitude()+","+location.getLongitude());
-    }
 
 
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        // TODO: handle status changes
-    }
+
+
+
 
 }
-

@@ -1,4 +1,4 @@
-package com.example.test.Data;
+package com.example.test.Data.LocationDAO;
 
 import com.example.test.Model.Location;
 

@@ -1,4 +1,4 @@
-package com.example.test.Data;
+package com.example.test.Data.AccountDAO;
 
 import android.database.Cursor;
 import com.example.test.Model.Account;

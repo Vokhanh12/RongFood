@@ -22,19 +22,19 @@
             android:usesCleartextTraffic="true"
             tools:targetApi="31">
         <activity
-                android:name=".Presentation.Dashbroad_Map.Dashbroad_MapActivity"
+                android:name=".Presentation.Dashbroad.DashbroadActivity"
                 android:exported="false"
                 android:label="helloworld"
                 android:theme="@style/Theme.Test.FullScreen.NoActionBar"/>
         <activity
-                android:name=".Presentation.Dashbroad.HomeFragment"
+                android:name=".Presentation.DashbroadMap.HomeFragment"
                 android:exported="false">
             <meta-data
                     android:name="android.app.lib_name"
                     android:value=""/>
         </activity>
         <activity
-                android:name=".Presentation.Dashbroad.DashbroadActivity"
+                android:name=".Presentation.DashbroadMap.DashbroadMapActivity"
                 android:exported="false"
                 android:label="helloworld"
                 android:theme="@style/Theme.Test.FullScreen.NoActionBar">

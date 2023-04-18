@@ -1,8 +1,6 @@
-package com.example.test.Data;
+package com.example.test.Data.AccountDAO;
 
 import com.example.test.Model.Account;
-
-import java.util.List;
 
 public interface AccountDAO {
         public Account getAcccountByUsername(String Username);

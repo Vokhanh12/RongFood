@@ -1,20 +1,15 @@
-package com.example.test.Data;
+package com.example.test.Data.LocationDAO;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import com.example.test.Model.Location;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import org.jetbrains.annotations.NotNull;
-
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 public class LocationDAOimpl_Firestore implements LocationDAO {
 

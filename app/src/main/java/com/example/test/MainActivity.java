@@ -16,12 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
-import com.example.test.Data.AccountDAO;
-import com.example.test.Data.AccountDAOImpl_SQLite;
+import com.example.test.Data.AccountDAO.AccountDAO;
+import com.example.test.Data.AccountDAO.AccountDAOImpl_SQLite;
 import com.example.test.Model.Account;
 import com.example.test.Presentation.Dashbroad.DashbroadActivity;
-import com.example.test.Presentation.Dashbroad_Map.Dashbroad_MapActivity;
-import com.example.test.Presentation.LoginActivity;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.routing.*;
@@ -76,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         btnMap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Dashbroad_MapActivity.class);
+                Intent intent = new Intent(MainActivity.this, DashbroadActivity.class);
                 startActivity(intent);
                 //Kết thúc form cũ
                 finish();
