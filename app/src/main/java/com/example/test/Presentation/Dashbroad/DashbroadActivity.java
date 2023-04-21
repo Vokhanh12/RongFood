@@ -30,7 +30,7 @@ public class DashbroadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashbroad_main);
 
 
-        searchView = findViewById(R.id.search);
+        //searchView = findViewById(R.id.search);
 
         //Khu khởi tạo
         recyclerViewIcon = findViewById(R.id.recycler_viewIcon);

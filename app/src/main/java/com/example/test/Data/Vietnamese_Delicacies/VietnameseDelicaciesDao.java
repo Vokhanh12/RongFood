@@ -4,9 +4,11 @@ import com.example.test.Model.VietnameseDelicacies;
 
 public interface VietnameseDelicaciesDao {
 
-    public void addVietnameseDelicaciesDao(VietnameseDelicaciesDao vietnameseDelicaciesDao);
-    public void deleteVietnameseDelicaciesDao(VietnameseDelicacies vietnameseDelicacies);
-    public void updateVietnameseDelicaciesDao(VietnameseDelicacies vietnameseDelicacies);
+    public void addVietnameseDelicacies(VietnameseDelicacies vietnameseDelicacies);
+
+    public void deleteVietnameseDelicacies(VietnameseDelicacies vietnameseDelicacies);
+
+    public void updateVietnameseDelicacies(VietnameseDelicacies vietnameseDelicacies);
 
 
 }

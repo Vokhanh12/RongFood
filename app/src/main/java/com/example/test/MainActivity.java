@@ -20,6 +20,7 @@ import com.example.test.Data.AccountDAO.AccountDAO;
 import com.example.test.Data.AccountDAO.AccountDAOImpl_SQLite;
 import com.example.test.Model.Account;
 import com.example.test.Presentation.Dashbroad.DashbroadActivity;
+import com.example.test.Presentation.DashbroadMap.DashbroadMapActivity;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.routing.*;
@@ -39,6 +40,9 @@ import java.util.Locale;
 import org.osmdroid.bonuspack.routing.OSRMRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.views.overlay.Polyline;
+
+import static com.example.test.SystemConfig.storeFirebase.getAllDocumentID;
+import static com.example.test.SystemConfig.storeFirebase.list_storeDocumentIds;
 
 
 public class MainActivity extends AppCompatActivity implements LocationListener{
@@ -74,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         btnMap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DashbroadActivity.class);
+                Intent intent = new Intent(MainActivity.this, DashbroadMapActivity.class);
                 startActivity(intent);
                 //Kết thúc form cũ
                 finish();
@@ -146,7 +150,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
 
 
-
+        for(String itemlist : getAllDocumentID()){
+            System.out.println(itemlist);
+        }
 
 
 
