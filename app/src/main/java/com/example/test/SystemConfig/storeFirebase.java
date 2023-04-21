@@ -30,26 +30,24 @@ public final class storeFirebase {
     }
 
     public static List<String> getAllDocumentID() {
-
-
-        storesCollectionRef = db.collection("Stores");
         db = FirebaseFirestore.getInstance();
-
-
-
+        storesCollectionRef = db.collection("Stores");
         List<String> list_storeDocumentIds = new ArrayList<>();
-        storesCollectionRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+
+        storesCollectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                    list_storeDocumentIds.add(document.getId());
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        list_storeDocumentIds.add(document.getId());
+                    }
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
                 }
             }
         });
 
-
         return list_storeDocumentIds;
-
 
     }
 

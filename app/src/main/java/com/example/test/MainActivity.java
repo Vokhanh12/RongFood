@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.*;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.example.test.Data.AccountDAO.AccountDAOImpl_SQLite;
 import com.example.test.Model.Account;
 import com.example.test.Presentation.Dashbroad.DashbroadActivity;
 import com.example.test.Presentation.DashbroadMap.DashbroadMapActivity;
+import com.example.test.SystemConfig.storeFirebase;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.routing.*;
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         btnMap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DashbroadMapActivity.class);
+                Intent intent = new Intent(MainActivity.this, DashbroadActivity.class);
                 startActivity(intent);
                 //Kết thúc form cũ
                 finish();
@@ -147,12 +149,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         roadManagerTask.execute(waypoints);
 
 
-
-
-
-        for(String itemlist : getAllDocumentID()){
-            System.out.println(itemlist);
-        }
 
 
 

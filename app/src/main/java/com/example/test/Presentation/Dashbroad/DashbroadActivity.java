@@ -3,6 +3,7 @@ package com.example.test.Presentation.Dashbroad;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.widget.SearchView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,12 +15,15 @@ import com.example.test.Data.StoreDAO.StoreDAOimpl_Firestore;
 import com.example.test.Model.Location;
 import com.example.test.Model.Store;
 import com.example.test.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DashbroadActivity extends AppCompatActivity {
 
+    private String TAG ="DashbroadActivity";
     private RecyclerView recyclerViewIcon;
     private RecyclerView recyclerViewImage;
 
@@ -110,8 +114,15 @@ public class DashbroadActivity extends AppCompatActivity {
        // storeDAOimplFirestore.addStore(store5);
       //  storeDAOimplFirestore.updateStore(store,"VVGj9go0v9fgowP0Vaz9");
 
-
-
+        storeDAOimplFirestore.getDocumentIds()
+                .addOnSuccessListener(new OnSuccessListener<List<String>>() {
+            @Override
+            public void onSuccess(List<String> list_storeDocumentids) {
+                for (String itemlist: list_storeDocumentids){
+                    Log.d(TAG,itemlist);
+                }
+            }
+        });
 
 
     }
