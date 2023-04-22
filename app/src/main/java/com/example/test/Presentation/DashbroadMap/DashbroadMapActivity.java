@@ -17,7 +17,10 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.preference.PreferenceManager;
 import com.example.test.Data.AccountDAO.AccountDAOimpl_FireAuth;
+import com.example.test.Data.StoreDAO.StoreDAOimpl_Firestore;
+import com.example.test.Model.Store;
 import com.example.test.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
 import androidx.core.view.GravityCompat;
@@ -56,6 +59,10 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
 
     private double Latitude,Longitude;
     private MapView map;
+
+    private ArrayList<OverlayItem> arlItemStores = new ArrayList<>();
+    private OverlayItem[] olItemStores = new OverlayItem[]{};
+    private int i;
 
 
     //Account account = new Account("khanhyou2024@gmail.com","abc@123");
@@ -147,15 +154,36 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         mapController.setZoom(18.0);
         mapController.setCenter(startPoint);
 
-        ArrayList<OverlayItem> item = new ArrayList<>();
+        //Seed the Stores in the Map
+        StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(this);
+        storeDAOimplFirestore.getDocumentIds()
+                .addOnSuccessListener(new OnSuccessListener<List<String>>() {
+            @Override
+            public void onSuccess(List<String> list_storeDocumentids) {
 
-        OverlayItem home = new OverlayItem("Cafe", "myCafe", new GeoPoint(10.360512, 106.677119));
-        OverlayItem storeClick = new OverlayItem("Cua hang", "my Cua hang", new GeoPoint(10.360512, 106.677119));
+                for(String itemList : list_storeDocumentids){
 
-        item.add(home);
-        item.add(new OverlayItem("Tiem tap hoa","tiem tap hoa ba on",new GeoPoint(10.3602029,106.6791972)));
+                    storeDAOimplFirestore.getStore(itemList).addOnSuccessListener(new OnSuccessListener<Store>() {
+                        @Override
+                        public void onSuccess(Store store) {
+                            com.example.test.Model.Location locationStore = store.get_location();
+                        olItemStores[i]= new OverlayItem(store.getTenCH(),store.get_NguoiSoHu()
+                                ,new GeoPoint(locationStore.getLatitude(),locationStore.getLongitude()));
+
+
+                        }
+                    });
+                    i++;
+                }
+            }
+        });
+
+        for(OverlayItem item :olItemStores){
+            arlItemStores.add(item);
+        }
+
         ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<>(getApplicationContext(),
-                item, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                arlItemStores, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
             @Override
             public boolean onItemSingleTapUp(int index, OverlayItem item) {
 

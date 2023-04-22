@@ -123,19 +123,20 @@ public class DashbroadActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<String> list_storeDocumentids) {
                 for (String itemlist: list_storeDocumentids){
-                    Log.d(TAG,itemlist);
+                    storeDAOimplFirestore.getStore(itemlist)
+                            .addOnSuccessListener(new OnSuccessListener<Store>() {
+                        @Override
+                        public void onSuccess(Store store) {
+                            Log.d(TAG,store.getTenCH());
+                            Log.d(TAG,store.get_NguoiSoHu());
+                            Log.d(TAG,store.get_MaCH());
+                        }
+                    });
+
                 }
             }
         });
 
-        storeDAOimplFirestore.getStore("ZnZJGVrZPcGPTua1Q4qm").addOnSuccessListener(new OnSuccessListener<Store>() {
-            @Override
-            public void onSuccess(Store store) {
-                Log.d(TAG,store.getTenCH());
-                Log.d(TAG,store.get_NguoiSoHu());
-                Log.d(TAG,store.get_MaCH());
-            }
-        });
 
 
 
