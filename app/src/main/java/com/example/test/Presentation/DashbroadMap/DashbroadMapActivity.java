@@ -118,7 +118,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         });
 
         //Load map
-        //OpenMap();
+        OpenMap();
 
 
         AccountDAOimpl_FireAuth accountDAOimplFirestore = new AccountDAOimpl_FireAuth(this);
@@ -142,7 +142,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
-        GeoPoint startPoint = new GeoPoint(10.425447,106.3289527);
+        GeoPoint startPoint = new GeoPoint(10.360326,106.6705763);
         IMapController mapController = map.getController();
         mapController.setZoom(18.0);
         mapController.setCenter(startPoint);
@@ -183,7 +183,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
 
 
 
-        setLocation(mapController);
+        //setLocation(mapController);
 
 
 

@@ -1,10 +1,10 @@
 package com.example.test.Data.StoreDAO;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import com.example.test.Model.Location;
 import com.example.test.Model.Store;
 import com.google.android.gms.tasks.*;
 import com.google.firebase.firestore.*;
@@ -125,6 +125,49 @@ public class StoreDAOimpl_Firestore implements StoreDao {
     public void deleteStore(Store store) {
 
     }
+
+    public Task<Store> getStore(String DocumentId) {
+        Location location = new Location(0, 0);
+        final Store[] store = {new Store("", "", "", location)};
+        Task<QuerySnapshot> task = storeCollection.get();
+
+        DocumentReference storeRef = db.collection("Stores").document(DocumentId);
+
+        return task.continueWith(new Continuation<QuerySnapshot, Store>() {
+            @Override
+            public Store then(@NonNull @NotNull Task<QuerySnapshot> task) throws Exception {
+                if (task.isSuccessful()) {
+                    QuerySnapshot queryDocumentSnapshots = task.getResult();
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        String _MaCH = documentSnapshot.getString("_MaCH");
+                        String _NguoiSoHuu = documentSnapshot.getString("_NguoiSoHuu");
+                        String _TenCH = documentSnapshot.getString("_TenCH");
+                        Map<String, Object> locationMap = (Map<String, Object>) documentSnapshot.get("_Location");
+                        if (locationMap != null) {
+                            double latitude = (double) locationMap.get("latitude");
+                            double longitude = (double) locationMap.get("longitude");
+                            location.setLatitude(latitude);
+                            location.setLongitude(longitude);
+                        }
+                        store[0] = new Store(_MaCH, _NguoiSoHuu, _TenCH, location);
+                    }
+                    return store[0];
+
+                }
+                else {
+                    // Handle the error
+                    Exception e = task.getException();
+                    Log.e("Firestore Error", e.getMessage());
+                    throw e;
+                }
+            }
+
+        });
+    }
+
+
+
+
 
     //Để giải quyết vấn đề này, bạn có thể sử dụng Task để đợi cho dữ liệu được
     // trả về trước khi trả về danh sách DocumentID

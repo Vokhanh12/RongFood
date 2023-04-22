@@ -6,17 +6,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.SearchView;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test.Data.StoreDAO.StoreDAOimpl_Firestore;
+import com.example.test.Data.StoreDAO.StoreDao;
 import com.example.test.Model.Location;
 import com.example.test.Model.Store;
 import com.example.test.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,6 +127,16 @@ public class DashbroadActivity extends AppCompatActivity {
                 }
             }
         });
+
+        storeDAOimplFirestore.getStore("ZnZJGVrZPcGPTua1Q4qm").addOnSuccessListener(new OnSuccessListener<Store>() {
+            @Override
+            public void onSuccess(Store store) {
+                Log.d(TAG,store.getTenCH());
+                Log.d(TAG,store.get_NguoiSoHu());
+                Log.d(TAG,store.get_MaCH());
+            }
+        });
+
 
 
     }
