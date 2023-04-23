@@ -128,42 +128,39 @@ public class StoreDAOimpl_Firestore implements StoreDao {
 
     public Task<Store> getStore(String DocumentId) {
         Location location = new Location(0, 0);
-        final Store[] store = {new Store("", "", "", location)};
-        Task<QuerySnapshot> task = storeCollection.get();
+        Store[] store = {new Store("", "", "", location)};
 
         DocumentReference storeRef = db.collection("Stores").document(DocumentId);
 
-        return task.continueWith(new Continuation<QuerySnapshot, Store>() {
+        return storeRef.get().continueWith(new Continuation<DocumentSnapshot, Store>() {
             @Override
-            public Store then(@NonNull @NotNull Task<QuerySnapshot> task) throws Exception {
+            public Store then(@NonNull @NotNull Task<DocumentSnapshot> task) throws Exception {
                 if (task.isSuccessful()) {
-                    QuerySnapshot queryDocumentSnapshots = task.getResult();
-                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        String _MaCH = documentSnapshot.getString("_MaCH");
-                        String _NguoiSoHuu = documentSnapshot.getString("_NguoiSoHuu");
-                        String _TenCH = documentSnapshot.getString("_TenCH");
-                        Map<String, Object> locationMap = (Map<String, Object>) documentSnapshot.get("_Location");
-                        if (locationMap != null) {
-                            double latitude = (double) locationMap.get("latitude");
-                            double longitude = (double) locationMap.get("longitude");
-                            location.setLatitude(latitude);
-                            location.setLongitude(longitude);
-                        }
-                        store[0] = new Store(_MaCH, _NguoiSoHuu, _TenCH, location);
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    String _MaCH = documentSnapshot.getString("_MaCH");
+                    String _NguoiSoHuu = documentSnapshot.getString("_NguoiSoHuu");
+                    String _TenCH = documentSnapshot.getString("_TenCH");
+                    Map<String, Object> locationMap = (Map<String, Object>) documentSnapshot.get("_Location");
+                    if (locationMap != null) {
+                        double latitude = (double) locationMap.get("latitude");
+                        double longitude = (double) locationMap.get("longitude");
+                        location.setLatitude(latitude);
+                        location.setLongitude(longitude);
                     }
+                    store[0] = new Store(_MaCH, _NguoiSoHuu, _TenCH, location);
                     return store[0];
-
-                }
-                else {
+                } else {
                     // Handle the error
                     Exception e = task.getException();
                     Log.e("Firestore Error", e.getMessage());
                     throw e;
                 }
-            }
 
+            }
         });
     }
+
+
 
 
 

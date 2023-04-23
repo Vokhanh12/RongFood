@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.*;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -43,6 +44,7 @@ import java.util.Locale;
 
 
 public class DashbroadMapActivity extends AppCompatActivity implements LocationListener {
+    private String TAG = "DashbroadMapActivity";
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private FrameLayout frameLayout;
@@ -60,9 +62,9 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
     private double Latitude,Longitude;
     private MapView map;
 
-    private ArrayList<OverlayItem> arlItemStores = new ArrayList<>();
     private OverlayItem[] olItemStores = new OverlayItem[]{};
-    private int i;
+
+    private  int i = 0;
 
 
     //Account account = new Account("khanhyou2024@gmail.com","abc@123");
@@ -155,7 +157,9 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         mapController.setCenter(startPoint);
 
         //Seed the Stores in the Map
-        StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(this);
+        ArrayList<OverlayItem> arlItemStores = new ArrayList<>();
+
+        StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(DashbroadMapActivity.this);
         storeDAOimplFirestore.getDocumentIds()
                 .addOnSuccessListener(new OnSuccessListener<List<String>>() {
             @Override
@@ -167,39 +171,47 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
                         @Override
                         public void onSuccess(Store store) {
                             com.example.test.Model.Location locationStore = store.get_location();
-                        olItemStores[i]= new OverlayItem(store.getTenCH(),store.get_NguoiSoHu()
-                                ,new GeoPoint(locationStore.getLatitude(),locationStore.getLongitude()));
+
+                            Log.d(TAG,store.get_MaCH());
+                            Log.d(TAG,store.get_NguoiSoHu());
+                            Log.d(TAG,store.getTenCH());
+                            Log.d(TAG,""+locationStore.getLatitude());
+                            Log.d(TAG,""+locationStore.getLongitude());
+                            Log.d(TAG,"TEST:"+itemList);
+
+                            arlItemStores.add(new OverlayItem(store.getTenCH(),store.get_NguoiSoHu()
+                                    ,new GeoPoint(locationStore.getLatitude(),locationStore.getLongitude())));
+
+                            ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<>(getApplicationContext(),
+                                    arlItemStores, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                                @Override
+                                public boolean onItemSingleTapUp(int index, OverlayItem item) {
+
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onItemLongPress(int index, OverlayItem item) {
+                                    return false;
+                                }
+
+
+                            });
+
+                            mOverlay.setFocusItemsOnTap(true);
+                            map.getOverlays().add(mOverlay);
 
 
                         }
                     });
-                    i++;
+
+
+
                 }
             }
         });
 
-        for(OverlayItem item :olItemStores){
-            arlItemStores.add(item);
-        }
 
-        ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<>(getApplicationContext(),
-                arlItemStores, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
-            @Override
-            public boolean onItemSingleTapUp(int index, OverlayItem item) {
-
-                return false;
-            }
-
-            @Override
-            public boolean onItemLongPress(int index, OverlayItem item) {
-                return false;
-            }
-
-
-        });
-
-        mOverlay.setFocusItemsOnTap(true);
-        map.getOverlays().add(mOverlay);
 
         if(ContextCompat.checkSelfPermission(DashbroadMapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED){

@@ -10,7 +10,7 @@ public interface StoreDao {
     public void updateStore(Store store,String DocumentID);
     public void deleteStore(Store store);
 
-    Task<Store> getStore(String DocumentId);
+    public Task<Store> getStore(String DocumentId);
 
     public Task<List<String>> getDocumentIds();
 
