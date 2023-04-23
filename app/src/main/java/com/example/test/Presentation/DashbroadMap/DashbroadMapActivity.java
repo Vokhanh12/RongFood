@@ -26,6 +26,8 @@ import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
 import androidx.core.view.GravityCompat;
 import org.osmdroid.api.IMapController;
+import org.osmdroid.bonuspack.routing.Road;
+import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
@@ -33,14 +35,11 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.OverlayItem;
+import org.osmdroid.views.overlay.Polyline;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-
-
-
 
 
 public class DashbroadMapActivity extends AppCompatActivity implements LocationListener {
@@ -58,13 +57,15 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
 
     private LocationManager locationManager;
 
+    private Button btnClick;
 
-    private double Latitude,Longitude;
+
+    private double Latitude, Longitude;
     private MapView map;
 
     private OverlayItem[] olItemStores = new OverlayItem[]{};
 
-    private  int i = 0;
+    private int i = 0;
 
 
     //Account account = new Account("khanhyou2024@gmail.com","abc@123");
@@ -78,6 +79,8 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
 
         tvLocation = findViewById(R.id.tvLocation);
         tvAddress = findViewById(R.id.tvAddress);
+
+        btnClick = findViewById(R.id.btnClick);
 
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -126,6 +129,12 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
             }
         });
 
+        btnClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getLocation();
+            }
+        });
         //Load map
         OpenMap();
 
@@ -136,14 +145,14 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         //Đăng ký tài khoảng
         //accountDAOimplFirestore.addAccount(account);
         //Thêm vào Firestore Database
-      //  com.example.test.Model.Location location1 = new com.example.test.Model.Location(10.3602029,106.6791972);
-       // LocationDAOimpl_Firestore locationDAOimplFirestore = new LocationDAOimpl_Firestore(this);
-       // locationDAOimplFirestore.addLocation(location1);
+        //  com.example.test.Model.Location location1 = new com.example.test.Model.Location(10.3602029,106.6791972);
+        // LocationDAOimpl_Firestore locationDAOimplFirestore = new LocationDAOimpl_Firestore(this);
+        // locationDAOimplFirestore.addLocation(location1);
 
 
     }
 
-    public void OpenMap(){
+    public void OpenMap() {
 
 
         Configuration.getInstance().load(getApplicationContext(),
@@ -151,99 +160,126 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
-        GeoPoint startPoint = new GeoPoint(10.360326,106.6705763);
+        GeoPoint startPoint = new GeoPoint(10.360326, 106.6705763);
         IMapController mapController = map.getController();
         mapController.setZoom(18.0);
         mapController.setCenter(startPoint);
 
-        //Seed the Stores in the Map
+        //Load the Stores in the Map
         ArrayList<OverlayItem> arlItemStores = new ArrayList<>();
 
         StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(DashbroadMapActivity.this);
         storeDAOimplFirestore.getDocumentIds()
                 .addOnSuccessListener(new OnSuccessListener<List<String>>() {
-            @Override
-            public void onSuccess(List<String> list_storeDocumentids) {
+                    @Override
+                    public void onSuccess(List<String> list_storeDocumentids) {
 
-                for(String itemList : list_storeDocumentids){
+                        for (String itemList : list_storeDocumentids) {
 
-                    storeDAOimplFirestore.getStore(itemList).addOnSuccessListener(new OnSuccessListener<Store>() {
-                        @Override
-                        public void onSuccess(Store store) {
-                            com.example.test.Model.Location locationStore = store.get_location();
-
-                            Log.d(TAG,store.get_MaCH());
-                            Log.d(TAG,store.get_NguoiSoHu());
-                            Log.d(TAG,store.getTenCH());
-                            Log.d(TAG,""+locationStore.getLatitude());
-                            Log.d(TAG,""+locationStore.getLongitude());
-                            Log.d(TAG,"TEST:"+itemList);
-
-                            arlItemStores.add(new OverlayItem(store.getTenCH(),store.get_NguoiSoHu()
-                                    ,new GeoPoint(locationStore.getLatitude(),locationStore.getLongitude())));
-
-                            ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<>(getApplicationContext(),
-                                    arlItemStores, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                            storeDAOimplFirestore.getStore(itemList).addOnSuccessListener(new OnSuccessListener<Store>() {
                                 @Override
-                                public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                                public void onSuccess(Store store) {
+                                    com.example.test.Model.Location locationStore = store.get_location();
+                                    arlItemStores.add(new OverlayItem(store.getTenCH(), store.get_NguoiSoHu()
+                                            , new GeoPoint(locationStore.getLatitude(), locationStore.getLongitude())));
 
-                                    return false;
+                                    ItemizedOverlayWithFocus<OverlayItem> mOverlayStores = new ItemizedOverlayWithFocus<>(getApplicationContext(),
+                                            arlItemStores, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                                        @Override
+                                        public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                                            return false;
+                                        }
+
+                                        @Override
+                                        public boolean onItemLongPress(int index, OverlayItem item) {
+                                            return false;
+                                        }
+
+
+                                    });
+
+                                    mOverlayStores.setFocusItemsOnTap(true);
+                                    map.getOverlays().add(mOverlayStores);
+
+
                                 }
-
-                                @Override
-                                public boolean onItemLongPress(int index, OverlayItem item) {
-                                    return false;
-                                }
-
-
                             });
-
-                            mOverlay.setFocusItemsOnTap(true);
-                            map.getOverlays().add(mOverlay);
 
 
                         }
-                    });
+                    }
+                });
 
 
+        //Add current my Location
 
-                }
+        ArrayList<OverlayItem> arlOverlayMyLocation = new ArrayList<>();
+        arlOverlayMyLocation.add(new OverlayItem("Cafe shop","My location",new GeoPoint(10.3607416,106.6777139)));
+
+        ItemizedOverlayWithFocus<OverlayItem> myOverlay = new ItemizedOverlayWithFocus<>(getApplicationContext(),
+                arlOverlayMyLocation, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+            @Override
+            public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                return false;
+            }
+
+            @Override
+            public boolean onItemLongPress(int index, OverlayItem item) {
+                return false;
             }
         });
+        myOverlay.setFocusItemsOnTap(true);
+        map.getOverlays().add(myOverlay);
 
-
-
-        if(ContextCompat.checkSelfPermission(DashbroadMapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(DashbroadMapActivity.this,new String[]{
+        if (ContextCompat.checkSelfPermission(DashbroadMapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(DashbroadMapActivity.this, new String[]{
                     Manifest.permission.ACCESS_FINE_LOCATION
-            },100);
+            }, 100);
         }
-
 
 
 
         //setLocation(mapController);
 
+        //Find Way
+        storeDAOimplFirestore.getStore("plfWJZwplvWvCsstScPC").addOnSuccessListener(new OnSuccessListener<Store>() {
+            @Override
+            public void onSuccess(Store store) {
+
+
+                com.example.test.Model.Location locationStart = new com.example.test.Model.Location(10.3607416,106.6777139);
+                //com.example.test.Model.Location locationEnd = store.get_location();
+                com.example.test.Model.Location locationEnd = new com.example.test.Model.Location(10.3698805,106.3100826);
+                Log.d(TAG,""+locationEnd.getLatitude());
+                Log.d(TAG,""+locationEnd.getLongitude());
+                MapDashbroad mapDashbroad = new MapDashbroad(locationStart,locationEnd,DashbroadMapActivity.this,map);
+                mapDashbroad.Findway();
+
+
+            }
+
+        });
+
 
 
 
     }
 
-    public void setLocation(IMapController mapController){
+    public void setLocation(IMapController mapController) {
         try {
 
-            GeoPoint myLocation = new GeoPoint(Latitude,Longitude);
+            GeoPoint myLocation = new GeoPoint(Latitude, Longitude);
             mapController.setCenter(myLocation);
 
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
     @SuppressLint("MissingPermission")
-    private void getLocation(){
+    private void getLocation() {
 
         try {
             locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
@@ -253,7 +289,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
             long duration = endTime - startTime;
             // Toast.makeText(this, "Time taken to get location: " + duration + "ms", Toast.LENGTH_SHORT).show();
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -267,7 +303,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
 
     }
@@ -277,23 +313,23 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
     public void onLocationChanged(@NonNull Location location) {
 
         this.Latitude = location.getLatitude();
-        this.Longitude= location.getLongitude();
+        this.Longitude = location.getLongitude();
 
-        Toast.makeText(this,""+location.getLatitude()+","+location.getLongitude(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
 
         try {
             Geocoder geocoder = new Geocoder(DashbroadMapActivity.this, Locale.getDefault());
-            List<Address> addresses =geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
             String address = addresses.get(0).getAddressLine(0);
 
             tvAddress.setText(address);
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-        System.out.println(""+location.getLatitude()+","+location.getLongitude());
-        tvLocation.setText(""+location.getLatitude()+","+location.getLongitude());
+        System.out.println("" + location.getLatitude() + "," + location.getLongitude());
+        tvLocation.setText("" + location.getLatitude() + "," + location.getLongitude());
     }
 
 
