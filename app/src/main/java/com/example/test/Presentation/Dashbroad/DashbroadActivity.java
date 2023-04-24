@@ -4,6 +4,8 @@ import android.graphics.drawable.Icon;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import com.example.test.Data.StoreDAO.StoreDao;
 import com.example.test.Data.Vietnamese_Delicacies.VietnameseDelicaciesimpl_Firestore;
 import com.example.test.Model.Location;
 import com.example.test.Model.Store;
+import com.example.test.Presentation.DashbroadMap.DashbroadMapActivity;
 import com.example.test.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,12 +38,17 @@ public class DashbroadActivity extends AppCompatActivity {
     private RecyclerView recyclerViewIcon;
     private RecyclerView recyclerViewImage;
 
+    private ListView lvSearch;
+
+    private SearchView etSearch;
     private SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashbroad_main);
 
+        lvSearch = findViewById(R.id.listnameFood);
+        etSearch = findViewById(R.id.search);
 
         //searchView = findViewById(R.id.search);
 
@@ -106,89 +114,7 @@ public class DashbroadActivity extends AppCompatActivity {
         recyclerViewImage.setAdapter(adapterImage);
 
 
-        //Khu xử lý
-        Store store = new Store("ST02","Nguyen Vo Khanh khanh 1","RongFood",new Location(10.0001,12.0001));
-        Store store1 = new Store("ST03","Nguyễn Văn B","Quán Cơm - Hủ Tiếu Cà Râu",new Location(10.4238216,106.3292482));
-        Store store2 = new Store("ST04","Nguyễn Văn C","Cafe võng KT",new Location(10.4236335,106.329828));
-        Store store3 = new Store("ST05","Nguyễn Văn D","Sun Coffee",new Location(10.4239236,106.32756));
-        Store store4 = new Store("ST06","Nguyễn Văn F","Cơm tấm Kiều Giang",new Location(10.4241077,106.3220485));
-        Store store5 = new Store("ST07","Nguyễn Văn G","Quán Ăn Hùng Duy",new Location(10.4241077,106.3220485));
-        StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(this);
-        VietnameseDelicaciesimpl_Firestore vietnameseDelicaciesimplFirestore = new VietnameseDelicaciesimpl_Firestore(this);
-
-        String fileSP = "D:\\Folder\\SP\\SP.txt";
-       // String fileHinhAnh="D:\\Folder\\SP\\HinhAnh.txt";
-       // String fileDiaPhuong="D:\\Folder\\SP\\DiaPhuong.txt";
-       // String fileKieuMonAn="D:\\Folder\\SP\\KieuMonAn.txt";
-        //String fileMieuTa="D:\\Folder\\SP\\MieuTaSP.txt";
-
-        try {
-
-            FileReader fileReaderSP = new FileReader(fileSP);
-            BufferedReader bufferedReaderSP = new BufferedReader(fileReaderSP);
-
-           // FileReader fileReaderHinhAnh = new FileReader(fileHinhAnh);
-          //  BufferedReader bufferedReaderHinhAnh = new BufferedReader(fileReaderHinhAnh);
-
-           // FileReader fileReaderDiaPhuong = new FileReader(fileDiaPhuong);
-           // BufferedReader bufferedReaderDiaPhuong = new BufferedReader(fileReaderDiaPhuong);
-
-           // FileReader fileReaderKieuMonAn = new FileReader(fileKieuMonAn);
-           // BufferedReader bufferedReaderKieuMonAn = new BufferedReader(fileReaderKieuMonAn);
-
-           // FileReader fileReaderMieuTa = new FileReader(fileMieuTa);
-            //BufferedReader bufferedReaderMieuTa = new BufferedReader(fileReaderMieuTa);
-
-            String lineSP,lineHinhAnh,lineDiaPhuong,lineKieuMonAn,lineMieuTaSP;
-            while ((lineSP = bufferedReaderSP.readLine()) != null){ //&& (lineHinhAnh = bufferedReaderHinhAnh.readLine())!=null
-          //  && (lineDiaPhuong = bufferedReaderDiaPhuong.readLine())!=null && (lineKieuMonAn = bufferedReaderKieuMonAn.readLine())!=null
-           // && (lineMieuTaSP = bufferedReaderMieuTa.readLine())!=null) {
-
-                Log.d(TAG,"TEST:"+lineSP);
-                //Log.d(TAG,"TEST:"+lineDiaPhuong);
-                //Log.d(TAG,"TEST:"+lineKieuMonAn);
-                //Log.d(TAG,"TEST:"+lineMieuTaSP);
-                //Log.d(TAG,"TEST:"+lineHinhAnh);
-
-
-
-            }
-
-            bufferedReaderSP.close();
-           // bufferedReaderDiaPhuong.close();
-           // bufferedReaderHinhAnh.close();
-           // bufferedReaderKieuMonAn.close();
-           // bufferedReaderMieuTa.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-       // storeDAOimplFirestore.addStore(store1);
-       // storeDAOimplFirestore.addStore(store2);
-       // storeDAOimplFirestore.addStore(store3);
-       // storeDAOimplFirestore.addStore(store4);
-       // storeDAOimplFirestore.addStore(store5);
-      //  storeDAOimplFirestore.updateStore(store,"VVGj9go0v9fgowP0Vaz9");
-
-        storeDAOimplFirestore.getDocumentIds()
-                .addOnSuccessListener(new OnSuccessListener<List<String>>() {
-            @Override
-            public void onSuccess(List<String> list_storeDocumentids) {
-                for (String itemlist: list_storeDocumentids){
-                    storeDAOimplFirestore.getStore(itemlist)
-                            .addOnSuccessListener(new OnSuccessListener<Store>() {
-                        @Override
-                        public void onSuccess(Store store) {
-                            Log.d(TAG,store.getTenCH());
-                            Log.d(TAG,store.get_NguoiSoHu());
-                            Log.d(TAG,store.get_MaCH());
-                        }
-                    });
-
-                }
-            }
-        });
+        SeachViewMonAn_VietnameseDilicacies_Store seachViewMonAn_vietnameseDilicacies_store = new SeachViewMonAn_VietnameseDilicacies_Store(DashbroadActivity.this,lvSearch,etSearch);
 
 
 

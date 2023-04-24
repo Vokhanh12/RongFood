@@ -3,6 +3,7 @@ package com.example.test.Presentation.DashbroadMap;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.location.*;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,7 +20,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.preference.PreferenceManager;
 import com.example.test.Data.AccountDAO.AccountDAOimpl_FireAuth;
 import com.example.test.Data.StoreDAO.StoreDAOimpl_Firestore;
+import com.example.test.Data.Vietnamese_Delicacies.VietnameseDelicaciesimpl_Firestore;
 import com.example.test.Model.Store;
+import com.example.test.Model.VietnameseDelicacies;
+import com.example.test.Presentation.Dashbroad.SeachViewMonAn_VietnameseDilicacies_Store;
 import com.example.test.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
@@ -37,6 +41,7 @@ import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.Polyline;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -66,6 +71,8 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
     private OverlayItem[] olItemStores = new OverlayItem[]{};
 
     private int i = 0;
+
+    private ListView listViewSeach;
 
 
     //Account account = new Account("khanhyou2024@gmail.com","abc@123");
@@ -130,11 +137,71 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         });
 
         btnClick.setOnClickListener(new View.OnClickListener() {
+
+            VietnameseDelicaciesimpl_Firestore vietnameseDelicaciesimplFirestore = new VietnameseDelicaciesimpl_Firestore( DashbroadMapActivity.this);
+
+
+
             @Override
             public void onClick(View v) {
                 getLocation();
+
+
+                //vietnameseDelicaciesimplFirestore.getDocumentCount();
+
+                /*
+                try {
+
+                    AssetManager assetManagerSP = getAssets();
+                    InputStream inputStreamSP = assetManagerSP.open("SP.txt");
+
+                    AssetManager assetManagerDiaPhuong = getAssets();
+                    InputStream inputStreamDiaPhuong = assetManagerDiaPhuong.open("DiaPhuong.txt");
+
+                    AssetManager assetManagerHinhAnh = getAssets();
+                    InputStream inputStreamHinhAnh = assetManagerDiaPhuong.open("HinhAnh.txt");
+
+                    AssetManager assetManagerKieuMonAn = getAssets();
+                    InputStream inputStreamKieuMonAn = assetManagerKieuMonAn.open("KieuMonAn.txt");
+
+                    AssetManager assetManagerMieuTa = getAssets();
+                    InputStream inputStreamMieuTa = assetManagerMieuTa.open("MieuTaSP.txt");
+
+                    BufferedReader bufferedReaderSP = new BufferedReader(new InputStreamReader(inputStreamSP));
+                    BufferedReader bufferedReaderDiaPhuong = new BufferedReader(new InputStreamReader(inputStreamDiaPhuong));
+                    BufferedReader bufferedReaderHinhAnh = new BufferedReader(new InputStreamReader(inputStreamHinhAnh));
+                    BufferedReader bufferedReaderKieuMonAN = new BufferedReader(new InputStreamReader(inputStreamKieuMonAn));
+                    BufferedReader bufferedReaderMieuTa = new BufferedReader(new InputStreamReader(inputStreamMieuTa));
+
+                    String lineSP,lineDiaPhuong,lineHinhAnh,lineKieuMonAn,lineMieuTa;
+
+                    while ((lineSP = bufferedReaderSP.readLine()) != null && (lineDiaPhuong = bufferedReaderDiaPhuong.readLine()) != null && (lineHinhAnh = bufferedReaderHinhAnh.readLine()) != null
+                    && (lineKieuMonAn = bufferedReaderKieuMonAN.readLine()) != null && (lineMieuTa = bufferedReaderMieuTa.readLine()) != null) {
+                        vietnameseDelicaciesimplFirestore.addVietnameseDelicacies(new VietnameseDelicacies(lineKieuMonAn,lineSP,lineHinhAnh,lineDiaPhuong,lineMieuTa));
+                    }
+
+                    bufferedReaderSP.close();
+                    inputStreamSP.close();
+
+                    bufferedReaderDiaPhuong.close();
+                    inputStreamDiaPhuong.close();
+
+                    bufferedReaderHinhAnh.close();
+                    inputStreamHinhAnh.close();
+
+                    bufferedReaderKieuMonAN.close();
+                    inputStreamKieuMonAn.close();
+
+                    bufferedReaderMieuTa.close();
+                    inputStreamMieuTa.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            */
+
             }
         });
+
         //Load map
         OpenMap();
 
@@ -148,6 +215,10 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         //  com.example.test.Model.Location location1 = new com.example.test.Model.Location(10.3602029,106.6791972);
         // LocationDAOimpl_Firestore locationDAOimplFirestore = new LocationDAOimpl_Firestore(this);
         // locationDAOimplFirestore.addLocation(location1);
+
+
+
+
 
 
     }

@@ -44,7 +44,7 @@
                     app:iconifiedByDefault="false"
                     app:queryBackground="@null"
                     app:submitBackground="@null"
-                    app:queryHint="Tim kiem" />
+                    app:queryHint="Tìm kiếm xung quanh" />
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_viewImage"
                     android:layout_width="match_parent"
