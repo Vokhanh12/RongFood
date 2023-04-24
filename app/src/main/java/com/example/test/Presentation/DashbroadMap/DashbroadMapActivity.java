@@ -254,6 +254,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
                 Log.d(TAG,""+locationEnd.getLatitude());
                 Log.d(TAG,""+locationEnd.getLongitude());
                 MapDashbroad mapDashbroad = new MapDashbroad(locationStart,locationEnd,DashbroadMapActivity.this,map);
+                //Find way
                 mapDashbroad.Findway();
 
 

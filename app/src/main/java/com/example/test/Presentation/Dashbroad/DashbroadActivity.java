@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test.Data.StoreDAO.StoreDAOimpl_Firestore;
 import com.example.test.Data.StoreDAO.StoreDao;
+import com.example.test.Data.Vietnamese_Delicacies.VietnameseDelicaciesimpl_Firestore;
 import com.example.test.Model.Location;
 import com.example.test.Model.Store;
 import com.example.test.R;
@@ -22,6 +23,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,6 +114,55 @@ public class DashbroadActivity extends AppCompatActivity {
         Store store4 = new Store("ST06","Nguyễn Văn F","Cơm tấm Kiều Giang",new Location(10.4241077,106.3220485));
         Store store5 = new Store("ST07","Nguyễn Văn G","Quán Ăn Hùng Duy",new Location(10.4241077,106.3220485));
         StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(this);
+        VietnameseDelicaciesimpl_Firestore vietnameseDelicaciesimplFirestore = new VietnameseDelicaciesimpl_Firestore(this);
+
+        String fileSP = "D:\\Folder\\SP\\SP.txt";
+       // String fileHinhAnh="D:\\Folder\\SP\\HinhAnh.txt";
+       // String fileDiaPhuong="D:\\Folder\\SP\\DiaPhuong.txt";
+       // String fileKieuMonAn="D:\\Folder\\SP\\KieuMonAn.txt";
+        //String fileMieuTa="D:\\Folder\\SP\\MieuTaSP.txt";
+
+        try {
+
+            FileReader fileReaderSP = new FileReader(fileSP);
+            BufferedReader bufferedReaderSP = new BufferedReader(fileReaderSP);
+
+           // FileReader fileReaderHinhAnh = new FileReader(fileHinhAnh);
+          //  BufferedReader bufferedReaderHinhAnh = new BufferedReader(fileReaderHinhAnh);
+
+           // FileReader fileReaderDiaPhuong = new FileReader(fileDiaPhuong);
+           // BufferedReader bufferedReaderDiaPhuong = new BufferedReader(fileReaderDiaPhuong);
+
+           // FileReader fileReaderKieuMonAn = new FileReader(fileKieuMonAn);
+           // BufferedReader bufferedReaderKieuMonAn = new BufferedReader(fileReaderKieuMonAn);
+
+           // FileReader fileReaderMieuTa = new FileReader(fileMieuTa);
+            //BufferedReader bufferedReaderMieuTa = new BufferedReader(fileReaderMieuTa);
+
+            String lineSP,lineHinhAnh,lineDiaPhuong,lineKieuMonAn,lineMieuTaSP;
+            while ((lineSP = bufferedReaderSP.readLine()) != null){ //&& (lineHinhAnh = bufferedReaderHinhAnh.readLine())!=null
+          //  && (lineDiaPhuong = bufferedReaderDiaPhuong.readLine())!=null && (lineKieuMonAn = bufferedReaderKieuMonAn.readLine())!=null
+           // && (lineMieuTaSP = bufferedReaderMieuTa.readLine())!=null) {
+
+                Log.d(TAG,"TEST:"+lineSP);
+                //Log.d(TAG,"TEST:"+lineDiaPhuong);
+                //Log.d(TAG,"TEST:"+lineKieuMonAn);
+                //Log.d(TAG,"TEST:"+lineMieuTaSP);
+                //Log.d(TAG,"TEST:"+lineHinhAnh);
+
+
+
+            }
+
+            bufferedReaderSP.close();
+           // bufferedReaderDiaPhuong.close();
+           // bufferedReaderHinhAnh.close();
+           // bufferedReaderKieuMonAn.close();
+           // bufferedReaderMieuTa.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
        // storeDAOimplFirestore.addStore(store1);
        // storeDAOimplFirestore.addStore(store2);

@@ -6,6 +6,7 @@ import com.example.test.Model.Location;
 import org.osmdroid.bonuspack.routing.OSRMRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
+import org.osmdroid.util.BoundingBox;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Polyline;
@@ -35,11 +36,17 @@ public class MapDashbroad {
 
     public void Findway() {
 
+        //get LocationStart and Location End
         arlWaypoints.add(new GeoPoint(this.locationStart.getLatitude(),this.locationStart.getLongitude())); // Start point
-        arlWaypoints.add(new GeoPoint(this.locationEnd.getLatitude(),this.locationStart.getLongitude())); // End point
+        arlWaypoints.add(new GeoPoint(this.locationEnd.getLatitude(),this.locationEnd.getLongitude())); // End point
 
         RoadManagerTask roadManagerTask = new RoadManagerTask();
         roadManagerTask.execute(arlWaypoints);
+
+        // Create a bounding box around the two GeoPoints
+        BoundingBox boundingBox = BoundingBox.fromGeoPoints(arlWaypoints);
+        // Set the bounding box on the map view
+        map.zoomToBoundingBox(boundingBox, true);
 
     }
 
