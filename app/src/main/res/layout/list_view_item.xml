@@ -5,7 +5,10 @@
 
     <TextView
         android:id="@+id/name"
+        android:text="Helloworld"
+        android:textSize="18dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"/>
 
 </RelativeLayout>

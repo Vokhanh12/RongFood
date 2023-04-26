@@ -64,7 +64,10 @@
                     android:id="@+id/listnameFood"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/search">
+                    android:layout_below="@id/search"
+                    android:visibility="gone"
+                    android:background="@color/white"
+                    android:textSize="20sp">
 
             </ListView>
 

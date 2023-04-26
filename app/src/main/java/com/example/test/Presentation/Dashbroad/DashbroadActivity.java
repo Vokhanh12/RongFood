@@ -4,12 +4,13 @@ import android.graphics.drawable.Icon;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,7 +42,7 @@ public class DashbroadActivity extends AppCompatActivity {
     private ListView lvSearch;
 
     private SearchView etSearch;
-    private SearchView searchView;
+    //private SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +117,18 @@ public class DashbroadActivity extends AppCompatActivity {
 
         SeachViewMonAn_VietnameseDilicacies_Store seachViewMonAn_vietnameseDilicacies_store = new SeachViewMonAn_VietnameseDilicacies_Store(DashbroadActivity.this,lvSearch,etSearch);
 
-
+        etSearch.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                  lvSearch.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    lvSearch.setVisibility(View.GONE);
+                }
+            }
+        });
 
 
     }
