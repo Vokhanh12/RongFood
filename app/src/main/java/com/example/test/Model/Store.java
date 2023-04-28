@@ -7,12 +7,23 @@ public class Store {
 
     private Location _Location;
 
+    private VietnameseDelicacies _Menu;
 
-    public Store(String MaCH,String NguoiSoHu,String TenCH,Location location){
+
+    public Store(String MaCH,String NguoiSoHu,String TenCH,Location location,VietnameseDelicacies Menu){
         this._MaCH=MaCH;
         this._NguoiSoHu=NguoiSoHu;
         this._TenCH=TenCH;
         this._Location=location;
+        this._Menu=Menu;
+    }
+
+    public VietnameseDelicacies get_Menu() {
+        return _Menu;
+    }
+
+    public void set_Menu(VietnameseDelicacies _Menu) {
+        this._Menu = _Menu;
     }
 
     public Location get_location() {

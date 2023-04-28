@@ -6,14 +6,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import com.example.test.Model.Location;
 import com.example.test.Model.Store;
+import com.example.test.Model.VietnameseDelicacies;
 import com.google.android.gms.tasks.*;
 import com.google.firebase.firestore.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class StoreDAOimpl_Firestore implements StoreDao {
 
@@ -30,17 +28,23 @@ public class StoreDAOimpl_Firestore implements StoreDao {
 
 
     @Override
-    public void addStore(Store store) {
+    public void addStore(Store store, LinkedList<VietnameseDelicacies> vietnameseDelicacies) {
         storeCollection.whereEqualTo("_MaCH", store.get_MaCH()).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if (queryDocumentSnapshots.size() == 0) {
                             Map<String, Object> newStore = new HashMap<>();
+
                             newStore.put("_MaCH", store.get_MaCH());
                             newStore.put("_TenCH", store.getTenCH());
                             newStore.put("_NguoiSoHuu", store.get_NguoiSoHu());
+
                             newStore.put("_Location", store.get_location());
+
+                            newStore.put("_Menu",store.get_Menu());
+
+
                             storeCollection.add(newStore).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
@@ -60,7 +64,7 @@ public class StoreDAOimpl_Firestore implements StoreDao {
     }
 
     @Override
-    public void updateStore(Store store, String DocumentID) {
+    public void updateStore(Store store,VietnameseDelicacies vietnameseDelicacies, String DocumentID) {
         DocumentReference storeRef = db.collection("Stores").document(DocumentID);
 
         // Update the "_MaCH" field of the document
@@ -128,7 +132,8 @@ public class StoreDAOimpl_Firestore implements StoreDao {
 
     public Task<Store> getStore(String DocumentId) {
         Location location = new Location(0, 0);
-        Store[] store = {new Store("", "", "", location)};
+        VietnameseDelicacies Menu = new VietnameseDelicacies("","","","","");
+        Store[] store = {new Store("", "", "", location,Menu)};
 
         DocumentReference storeRef = db.collection("Stores").document(DocumentId);
 
@@ -137,17 +142,35 @@ public class StoreDAOimpl_Firestore implements StoreDao {
             public Store then(@NonNull @NotNull Task<DocumentSnapshot> task) throws Exception {
                 if (task.isSuccessful()) {
                     DocumentSnapshot documentSnapshot = task.getResult();
+
                     String _MaCH = documentSnapshot.getString("_MaCH");
                     String _NguoiSoHuu = documentSnapshot.getString("_NguoiSoHuu");
                     String _TenCH = documentSnapshot.getString("_TenCH");
+
                     Map<String, Object> locationMap = (Map<String, Object>) documentSnapshot.get("_Location");
+                    Map<String,Object> DelicaciesMenu =(Map<String, Object>) documentSnapshot.get("_Menu");
                     if (locationMap != null) {
                         double latitude = (double) locationMap.get("latitude");
                         double longitude = (double) locationMap.get("longitude");
                         location.setLatitude(latitude);
                         location.setLongitude(longitude);
                     }
-                    store[0] = new Store(_MaCH, _NguoiSoHuu, _TenCH, location);
+                    if (DelicaciesMenu != null){
+                        String TenMonAn  = (String)DelicaciesMenu.get("_TenMonAn");
+                        String KieuMonAn = (String)DelicaciesMenu.get("_KieuMonAn");
+                        String DiaPhuong = (String)DelicaciesMenu.get("_DiaPhuong");
+                        String MieuTa = (String)DelicaciesMenu.get("_MieuTa");
+                        //Link web ảnh
+                        String HinhAnh =(String)DelicaciesMenu.get("_HinhAnh");
+
+                        Menu.set_TenMon(TenMonAn);
+                        Menu.set_MieuTa(MieuTa);
+                        Menu.set_KieuMonAn(KieuMonAn);
+                        Menu.set_HinhAnh(HinhAnh);
+                        Menu.set_HinhAnh(HinhAnh);
+
+                    }
+                    store[0] = new Store(_MaCH, _NguoiSoHuu, _TenCH, location,Menu);
                     return store[0];
                 } else {
                     // Handle the error

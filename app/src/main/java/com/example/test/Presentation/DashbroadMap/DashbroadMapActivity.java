@@ -138,8 +138,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
 
         btnClick.setOnClickListener(new View.OnClickListener() {
 
-            VietnameseDelicaciesimpl_Firestore vietnameseDelicaciesimplFirestore = new VietnameseDelicaciesimpl_Firestore( DashbroadMapActivity.this);
-
+            VietnameseDelicaciesimpl_Firestore vietnameseDelicaciesimplFirestore = new VietnameseDelicaciesimpl_Firestore(DashbroadMapActivity.this);
 
 
             @Override
@@ -217,7 +216,10 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         // locationDAOimplFirestore.addLocation(location1);
 
 
+        VietnameseDelicacies Menu = new VietnameseDelicacies();
 
+        StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(this);
+        storeDAOimplFirestore.addStore();
 
 
 
@@ -285,7 +287,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         //Add current my Location
 
         ArrayList<OverlayItem> arlOverlayMyLocation = new ArrayList<>();
-        arlOverlayMyLocation.add(new OverlayItem("Cafe shop","My location",new GeoPoint(10.3607416,106.6777139)));
+        arlOverlayMyLocation.add(new OverlayItem("Cafe shop", "My location", new GeoPoint(10.3607416, 106.6777139)));
 
         ItemizedOverlayWithFocus<OverlayItem> myOverlay = new ItemizedOverlayWithFocus<>(getApplicationContext(),
                 arlOverlayMyLocation, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
@@ -310,7 +312,6 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         }
 
 
-
         //setLocation(mapController);
 
         //Find Way
@@ -319,12 +320,12 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
             public void onSuccess(Store store) {
 
 
-                com.example.test.Model.Location locationStart = new com.example.test.Model.Location(10.3607416,106.6777139);
+                com.example.test.Model.Location locationStart = new com.example.test.Model.Location(10.3607416, 106.6777139);
                 //com.example.test.Model.Location locationEnd = store.get_location();
-                com.example.test.Model.Location locationEnd = new com.example.test.Model.Location(10.3698805,106.3100826);
-                Log.d(TAG,""+locationEnd.getLatitude());
-                Log.d(TAG,""+locationEnd.getLongitude());
-                MapDashbroad mapDashbroad = new MapDashbroad(locationStart,locationEnd,DashbroadMapActivity.this,map);
+                com.example.test.Model.Location locationEnd = new com.example.test.Model.Location(10.3698805, 106.3100826);
+                Log.d(TAG, "" + locationEnd.getLatitude());
+                Log.d(TAG, "" + locationEnd.getLongitude());
+                MapDashbroad mapDashbroad = new MapDashbroad(locationStart, locationEnd, DashbroadMapActivity.this, map);
                 //Find way
                 mapDashbroad.Findway();
 
@@ -332,8 +333,6 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
             }
 
         });
-
-
 
 
     }
@@ -352,18 +351,26 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
 
     @SuppressLint("MissingPermission")
     private void getLocation() {
+        LocationManager locationManager = (LocationManager) getSystemService(DashbroadMapActivity.LOCATION_SERVICE);
 
-        try {
-            locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
-            long startTime = System.currentTimeMillis();
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, DashbroadMapActivity.this);
-            long endTime = System.currentTimeMillis();
-            long duration = endTime - startTime;
-            // Toast.makeText(this, "Time taken to get location: " + duration + "ms", Toast.LENGTH_SHORT).show();
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
+// Kiểm tra xem quyền truy cập vị trí đã được cấp cho ứng dụng hay chưa
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Nếu chưa được cấp quyền, yêu cầu cấp quyền truy cập vị trí
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         }
+
+// Lấy vị trí thông qua dịch vụ vị trí được cung cấp
+        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+        if (location != null) {
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+            Toast.makeText(this, "Latitude: " + latitude + " Longitude: " + longitude, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Unable to get location", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
@@ -409,6 +416,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
     public void onStatusChanged(String provider, int status, Bundle extras) {
         // TODO: handle status changes
     }
+
 
 }
 
