@@ -32,7 +32,7 @@ public class SeachViewMonAn_VietnameseDilicacies_Store {
     private ArrayList<MonAn_VietnameseDelicacies> _arraylistMonAn = new ArrayList<>();
 
     public SeachViewMonAn_VietnameseDilicacies_Store(Context context, ListView listViewSeach, SearchView editsearch) {
-        this._mContext = context;
+      /*  this._mContext = context;
 
 
         //Khởi tạo StoreDAOimpl_Firestore
@@ -93,6 +93,9 @@ public class SeachViewMonAn_VietnameseDilicacies_Store {
                 });
 
 
+    }
+
+       */
     }
 
 }

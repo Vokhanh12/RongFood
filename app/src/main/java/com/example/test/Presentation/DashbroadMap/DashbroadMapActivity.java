@@ -25,7 +25,9 @@ import com.example.test.Model.Store;
 import com.example.test.Model.VietnameseDelicacies;
 import com.example.test.Presentation.Dashbroad.SeachViewMonAn_VietnameseDilicacies_Store;
 import com.example.test.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
 import androidx.core.view.GravityCompat;
@@ -43,6 +45,7 @@ import org.osmdroid.views.overlay.Polyline;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -143,6 +146,31 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
 
             @Override
             public void onClick(View v) {
+                StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(DashbroadMapActivity.this);
+
+                storeDAOimplFirestore.getStore("ftaKAKnAjX0oh3EAQ9DT").addOnCompleteListener(new OnCompleteListener<Store>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Store> task) {
+                        if (task.isSuccessful()) {
+                            Store store = task.getResult();
+                            LinkedList<VietnameseDelicacies> llMenu = store.get_Menu();
+
+                            for (VietnameseDelicacies menu : llMenu) {
+                                Log.d(TAG, "_DiaPhuong: " + menu.get_DiaPhuong());
+                                Log.d(TAG, "_HinhAnh: " + menu.get_HinhAnh());
+                                Log.d(TAG, "_KieuMonAn: " + menu.get_KieuMonAn());
+                                Log.d(TAG, "_MieuTa: " + menu.get_MieuTa());
+                                Log.d(TAG, "_Price: " + menu.get_Price());
+                                Log.d(TAG, "_TenMon: " + menu.get_TenMon());
+                            }
+
+                        } else {
+                            Exception e = task.getException();
+                            Log.e("Firestore Error", e.getMessage());
+                        }
+                    }
+                });
+
                 getLocation();
 
 
@@ -216,10 +244,31 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         // locationDAOimplFirestore.addLocation(location1);
 
 
-        VietnameseDelicacies Menu = new VietnameseDelicacies();
+        VietnameseDelicacies Menu = new VietnameseDelicacies("Bánh bột mì","Bánh mì thịt bò nướng"
+                ,"https://cdn.tgdd.vn/2021/05/CookRecipe/Avatar/banh-mi-thit-bo-nuong-thumbnail-1.jpg"
+                ,"Tiền Giang","Bánh mì thịt bò nướng có thịt bò được nướng thơm lừng, đậm vị bên trong bánh mì giòn tan, thêm chút rau và đồ chua ngon lành, là một món ăn sáng cực kì bổ dưỡng và thơm ngon."
+        ,25.000);
 
-        StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(this);
-        storeDAOimplFirestore.addStore();
+        VietnameseDelicacies Menu1 = new VietnameseDelicacies("Bánh bột mì","Bánh mì thịt bò xào"
+                ,"https://cdn.tgdd.vn/2021/05/CookRecipe/Avatar/banh-mi-thit-bo-xao-thumbnail-2.jpg"
+                ,"Tiền Giang","Bánh mì thịt bò xào phô mai tuy đơn giản nhưng vô cùng hấp dẫn. Thịt bò mềm ngọt quyện với độ giòn giòn của hành tây kết hợp với vị phô mai thơm lừng béo ngậy, đây sẽ là 1 món ăn ngon bất ngờ khiến phải suýt xoa và muốn ăn thêm nữa đấy!"
+        ,25.000);
+
+        VietnameseDelicacies Menu2 = new VietnameseDelicacies("Bánh bột mì","Bánh mì thịt bò băm"
+                ,"https://cdn.tgdd.vn/2021/05/CookRecipe/Avatar/banh-mi-thit-bo-xao-thumbnail-1.jpg"
+                ,"Tiền Giang","Bánh mì thịt bò băm thơm lừng, có vị ngon ngọt của thịt bò băm và vị béo ngậy, tan chảy của phô mai, chắc chắn sẽ là một món ăn cực kì độc đáo bạn có thể dùng để thiết đãi gia đình và bạn bè."
+        ,30.000);
+
+        LinkedList<VietnameseDelicacies> llMenuBanhMi = new LinkedList<>();
+
+        llMenuBanhMi.add(Menu);
+        llMenuBanhMi.add(Menu1);
+        llMenuBanhMi.add(Menu2);
+
+
+        com.example.test.Model.Location banhmiLocation = new com.example.test.Model.Location(10.421457,106.3372856);
+        Store store = new Store("CH01","Tuấn Kiệt","Bánh mì Tuấn kiệt",banhmiLocation,llMenuBanhMi);
+
 
 
 
@@ -315,14 +364,17 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         //setLocation(mapController);
 
         //Find Way
-        storeDAOimplFirestore.getStore("plfWJZwplvWvCsstScPC").addOnSuccessListener(new OnSuccessListener<Store>() {
+
+
+        storeDAOimplFirestore.getStore("ftaKAKnAjX0oh3EAQ9DT").addOnSuccessListener(new OnSuccessListener<Store>() {
             @Override
             public void onSuccess(Store store) {
 
+                com.example.test.Model.Location LocationEnd = new com.example.test.Model.Location(store.get_location().getLatitude(),store.get_location().getLongitude());
 
                 com.example.test.Model.Location locationStart = new com.example.test.Model.Location(10.3607416, 106.6777139);
                 //com.example.test.Model.Location locationEnd = store.get_location();
-                com.example.test.Model.Location locationEnd = new com.example.test.Model.Location(10.3698805, 106.3100826);
+                com.example.test.Model.Location locationEnd = new com.example.test.Model.Location(LocationEnd.getLatitude(), LocationEnd.getLongitude());
                 Log.d(TAG, "" + locationEnd.getLatitude());
                 Log.d(TAG, "" + locationEnd.getLongitude());
                 MapDashbroad mapDashbroad = new MapDashbroad(locationStart, locationEnd, DashbroadMapActivity.this, map);
@@ -333,6 +385,10 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
             }
 
         });
+
+
+
+
 
 
     }

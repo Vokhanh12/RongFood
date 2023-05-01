@@ -1,5 +1,7 @@
 package com.example.test.Model;
 
+import java.util.LinkedList;
+
 public class Store {
     private String _MaCH;
     private String _NguoiSoHu;
@@ -7,23 +9,23 @@ public class Store {
 
     private Location _Location;
 
-    private VietnameseDelicacies _Menu;
+    private LinkedList<VietnameseDelicacies> _llMenu;
 
 
-    public Store(String MaCH,String NguoiSoHu,String TenCH,Location location,VietnameseDelicacies Menu){
+    public Store(String MaCH,String NguoiSoHu,String TenCH,Location location,LinkedList<VietnameseDelicacies> llMenu){
         this._MaCH=MaCH;
         this._NguoiSoHu=NguoiSoHu;
         this._TenCH=TenCH;
         this._Location=location;
-        this._Menu=Menu;
+        this._llMenu=llMenu;
     }
 
-    public VietnameseDelicacies get_Menu() {
-        return _Menu;
+    public LinkedList<VietnameseDelicacies> get_Menu() {
+        return _llMenu;
     }
 
-    public void set_Menu(VietnameseDelicacies _Menu) {
-        this._Menu = _Menu;
+    public void set_Menu(LinkedList<VietnameseDelicacies> _Menu) {
+        this._llMenu = _Menu;
     }
 
     public Location get_location() {

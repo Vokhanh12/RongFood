@@ -28,7 +28,7 @@ public class StoreDAOimpl_Firestore implements StoreDao {
 
 
     @Override
-    public void addStore(Store store, LinkedList<VietnameseDelicacies> vietnameseDelicacies) {
+    public void addStore(Store store, LinkedList<VietnameseDelicacies> llMenu) {
         storeCollection.whereEqualTo("_MaCH", store.get_MaCH()).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -43,6 +43,7 @@ public class StoreDAOimpl_Firestore implements StoreDao {
                             newStore.put("_Location", store.get_location());
 
                             newStore.put("_Menu",store.get_Menu());
+
 
 
                             storeCollection.add(newStore).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -130,10 +131,14 @@ public class StoreDAOimpl_Firestore implements StoreDao {
 
     }
 
+
+
     public Task<Store> getStore(String DocumentId) {
         Location location = new Location(0, 0);
-        VietnameseDelicacies Menu = new VietnameseDelicacies("","","","","");
-        Store[] store = {new Store("", "", "", location,Menu)};
+        VietnameseDelicacies Menu = new VietnameseDelicacies("","","","","",0.0);
+        LinkedList<VietnameseDelicacies> llMenu = new LinkedList<>();
+
+        Store[] store = {new Store("", "", "", location,llMenu)};
 
         DocumentReference storeRef = db.collection("Stores").document(DocumentId);
 
@@ -148,29 +153,33 @@ public class StoreDAOimpl_Firestore implements StoreDao {
                     String _TenCH = documentSnapshot.getString("_TenCH");
 
                     Map<String, Object> locationMap = (Map<String, Object>) documentSnapshot.get("_Location");
-                    Map<String,Object> DelicaciesMenu =(Map<String, Object>) documentSnapshot.get("_Menu");
                     if (locationMap != null) {
                         double latitude = (double) locationMap.get("latitude");
                         double longitude = (double) locationMap.get("longitude");
                         location.setLatitude(latitude);
                         location.setLongitude(longitude);
                     }
-                    if (DelicaciesMenu != null){
-                        String TenMonAn  = (String)DelicaciesMenu.get("_TenMonAn");
-                        String KieuMonAn = (String)DelicaciesMenu.get("_KieuMonAn");
-                        String DiaPhuong = (String)DelicaciesMenu.get("_DiaPhuong");
-                        String MieuTa = (String)DelicaciesMenu.get("_MieuTa");
-                        //Link web ảnh
-                        String HinhAnh =(String)DelicaciesMenu.get("_HinhAnh");
 
-                        Menu.set_TenMon(TenMonAn);
-                        Menu.set_MieuTa(MieuTa);
-                        Menu.set_KieuMonAn(KieuMonAn);
-                        Menu.set_HinhAnh(HinhAnh);
-                        Menu.set_HinhAnh(HinhAnh);
+                    List<Map<String, Object>> menuList = (List<Map<String, Object>>) documentSnapshot.get("_Menu");
+
+                    if (menuList != null) {
+                        for (Map<String, Object> delicacyMap : menuList) {
+                            VietnameseDelicacies delicacy = new VietnameseDelicacies(
+                                    delicacyMap.get("_KieuMonAn").toString(),
+                                    delicacyMap.get("_TenMon").toString(),
+                                    delicacyMap.get("_HinhAnh").toString(),
+                                    delicacyMap.get("_DiaPhuong").toString(),
+                                    delicacyMap.get("_MieuTa").toString(),
+                                    Double.parseDouble(delicacyMap.get("_Price").toString())
+                            );
+                            llMenu.add(delicacy);
+
+
+                        }
+
 
                     }
-                    store[0] = new Store(_MaCH, _NguoiSoHuu, _TenCH, location,Menu);
+                    store[0] = new Store(_MaCH, _NguoiSoHuu, _TenCH, location,llMenu);
                     return store[0];
                 } else {
                     // Handle the error
@@ -182,7 +191,6 @@ public class StoreDAOimpl_Firestore implements StoreDao {
             }
         });
     }
-
 
 
 

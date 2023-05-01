@@ -119,6 +119,7 @@ public class VietnameseDelicaciesimpl_Firestore implements VietnameseDelicaciesD
     }
 
 
+    /*
     public Task<VietnameseDelicacies> getVietnameseDelicacies(String DocumentId) {
         Location location = new Location(0, 0);
         VietnameseDelicacies[] vietnameseDelicacies = {new VietnameseDelicacies("", "", "", "", "")};
@@ -149,4 +150,6 @@ public class VietnameseDelicaciesimpl_Firestore implements VietnameseDelicaciesD
         });
 
     }
+
+     */
 }

@@ -7,12 +7,15 @@ public class VietnameseDelicacies {
     private String _DiaPhuong;
     private String _MieuTa;
 
-    public VietnameseDelicacies(String _KieuMonAn, String _TenMon, String _HinhAnh, String _DiaPhuong, String _MieuTa) {
-        this._KieuMonAn = _KieuMonAn;
-        this._TenMon = _TenMon;
-        this._HinhAnh = _HinhAnh;
-        this._DiaPhuong = _DiaPhuong;
-        this._MieuTa = _MieuTa;
+    private double _Price;
+
+    public VietnameseDelicacies(String KieuMonAn, String TenMon, String HinhAnh, String DiaPhuong, String MieuTa,double Price) {
+        this._KieuMonAn = KieuMonAn;
+        this._TenMon = TenMon;
+        this._HinhAnh = HinhAnh;
+        this._DiaPhuong = DiaPhuong;
+        this._MieuTa = MieuTa;
+        this._Price = Price;
     }
 
     public String get_KieuMonAn() {
@@ -35,6 +38,8 @@ public class VietnameseDelicacies {
         return _MieuTa;
     }
 
+    public double get_Price() {return _Price;}
+
     public void set_KieuMonAn(String _KieuMonAn) {
         this._KieuMonAn = _KieuMonAn;
     }
@@ -54,4 +59,7 @@ public class VietnameseDelicacies {
     public void set_MieuTa(String _MieuTa) {
         this._MieuTa = _MieuTa;
     }
+
+    public void set_Price(double _Price) {this._Price = _Price;}
+
 }
