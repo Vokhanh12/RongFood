@@ -244,32 +244,59 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         // locationDAOimplFirestore.addLocation(location1);
 
 
-        VietnameseDelicacies Menu = new VietnameseDelicacies("Bánh bột mì","Bánh mì thịt bò nướng"
-                ,"https://cdn.tgdd.vn/2021/05/CookRecipe/Avatar/banh-mi-thit-bo-nuong-thumbnail-1.jpg"
-                ,"Tiền Giang","Bánh mì thịt bò nướng có thịt bò được nướng thơm lừng, đậm vị bên trong bánh mì giòn tan, thêm chút rau và đồ chua ngon lành, là một món ăn sáng cực kì bổ dưỡng và thơm ngon."
+        VietnameseDelicacies Menu = new VietnameseDelicacies("Cafe","Cafe pha phin"
+                ,"https://websitecukcukvn.misacdn.net/wp-content/uploads/2019/04/cafe-pha-phin-768x570.jpg"
+                ,"Tiền Giang","Cafe – thứ thức uống vô cùng quan trọng và sẽ là món đồ uống chủ đạo đối với quán cafe truyền thống. Theo thống kê, cafe chiếm gần 50% tổng doanh thu của quán. Bạn có thể thấy trên thị trường có rất nhiều loại cafe từ truyền thống đến cafe phương tây nhưng phổ biến nhất là cafe đen, cafe sữa. Cafe được trồng trên mảnh đất Tây Nguyên – Quê hương của những hạt cafe nguyên chất."
+        ,20.000);
+
+        VietnameseDelicacies Menu1 = new VietnameseDelicacies("Cafe","Cafe pha máy"
+                ,"https://websitecukcukvn.misacdn.net/wp-content/uploads/2019/04/cafe-pha-may-768x742.jpg"
+                ,"Tiền Giang","Cafe máy (cafe Italia) là nhóm đồ uống đặc thù, có vị chua thanh, dịu nhẹ hơn so với café Việt. Việc pha chế cafe máy cần đến máy pha cafe và các dụng cụ chuyên biệt. Hơn nữa, người pha cafe máy (barista) cũng cần có một trình độ kỹ năng nhất định."
         ,25.000);
 
-        VietnameseDelicacies Menu1 = new VietnameseDelicacies("Bánh bột mì","Bánh mì thịt bò xào"
-                ,"https://cdn.tgdd.vn/2021/05/CookRecipe/Avatar/banh-mi-thit-bo-xao-thumbnail-2.jpg"
-                ,"Tiền Giang","Bánh mì thịt bò xào phô mai tuy đơn giản nhưng vô cùng hấp dẫn. Thịt bò mềm ngọt quyện với độ giòn giòn của hành tây kết hợp với vị phô mai thơm lừng béo ngậy, đây sẽ là 1 món ăn ngon bất ngờ khiến phải suýt xoa và muốn ăn thêm nữa đấy!"
+        VietnameseDelicacies Menu2 = new VietnameseDelicacies("Trà","Trà chanh lipton"
+                ,"https://hc.com.vn/i/ecommerce/media/ckeditor_3328020.jpg"
+                ,"Tiền Giang","Cho mật ong và đường vào, khuấy đều. Cho vài lát chanh thái mỏng vào, thêm đá viên và lắc đều. Trang trí thêm 1 lát chanh tươi lên miệng ly. Vậy là xong.\n" +
+                "\n" +
+                "Như vậy bạn đã hoàn thành một cốc lipton chanh chua nhẹ dịu, giải nhiệt, giảm căng thẳng những ngày hè oi bức rồi. Cùng thưởng thức với gia đình, bạn bè nhé."
+        ,18.000);
+
+        VietnameseDelicacies Menu3 = new VietnameseDelicacies("Nước ép rau","Rau má sữa tươi"
+        ,"https://hc.com.vn/i/ecommerce/media/ckeditor_3230477.jpg","Tiền giang",
+                " Bỏ nước ra ly, thêm đá vào và thưởng thức. Nếu bạn không thích đá thì hãy bỏ vào ngăn mát tủ lạnh 30 phút rồi đem ra thưởng thức nhé! Thức uống phân tầng 2 màu đẹp mắt, dùng muỗng khuấy đều và thưởng thức mùi thơm béo của sữa dừa hòa quyện cùng rau má đậu xanh tạo nên một hương vị khó cưỡng, vị mát lạnh xua tan cái nóng mùa hè."
         ,25.000);
 
-        VietnameseDelicacies Menu2 = new VietnameseDelicacies("Bánh bột mì","Bánh mì thịt bò băm"
-                ,"https://cdn.tgdd.vn/2021/05/CookRecipe/Avatar/banh-mi-thit-bo-xao-thumbnail-1.jpg"
-                ,"Tiền Giang","Bánh mì thịt bò băm thơm lừng, có vị ngon ngọt của thịt bò băm và vị béo ngậy, tan chảy của phô mai, chắc chắn sẽ là một món ăn cực kì độc đáo bạn có thể dùng để thiết đãi gia đình và bạn bè."
-        ,30.000);
+        VietnameseDelicacies Menu4 = new VietnameseDelicacies("Nước ngọt","Nước tăng lực Sting hương dâu 330ml"
+        ,"https://cdn.tgdd.vn/Products/Images/3226/76520/bhx/nuoc-tang-luc-sting-huong-dau-330ml-201909031559004919.jpg","Tiền giang"
+        ,"Nước tăng lực Sting với mùi vị thơm ngon, sảng khoái, bổ sung hồng sâm chất lượng. Sting giúp cơ thể bù đắp nước, bổ sung năng lượng, vitamin C và E, giúp xua tan cơn khát và cảm giác mệt mỏi cùng dâu cho nhẹ nhàng và dễ chịu. Cam kết chính hãng, chất lượng và an toàn"
+        ,20.000);
 
-        LinkedList<VietnameseDelicacies> llMenuBanhMi = new LinkedList<>();
+        VietnameseDelicacies Menu5 = new VietnameseDelicacies("Nước ngọt","Nước tăng lực Sting Gold 320ml",
+                "https://cdn.tgdd.vn/Products/Images/3226/91595/bhx/nuoc-tang-luc-sting-gold-320ml-202211260911171930.jpg"
+        ,"Tiền Giang","Với thành phần tự nhiên kết hợp với hương vị nhân sâm tạo nên sự kết hợp độc đáo với mùi vị thơm ngon, sảng khoái. Sản phẩm giúp cơ thể bù đắp nước, bổ sung năng lượng, vitamin C và E, giúp xua tan cơn khát và cảm giác mệt mỏi, cho bạn cảm giác cuộn trào hứng khởi"
+        ,20.000);
 
-        llMenuBanhMi.add(Menu);
-        llMenuBanhMi.add(Menu1);
-        llMenuBanhMi.add(Menu2);
+        VietnameseDelicacies Menu6 = new VietnameseDelicacies("Nước ngọt","Nước ngọt Coca Cola chai 600ml"
+        ,"https://cdn.tgdd.vn/Products/Images/2443/125397/bhx/nuoc-ngot-coca-cola-600ml-202109061127225690.jpg"
+                ,"Tiền Giang","Từ thương hiệu loại nước ngọt giải khát được nhiều người yêu thích với hương vị thơm ngon, sảng khoái. Nước ngọt Coca Cola chai 600ml chính hãng nước ngọt Coca Cola với lượng gas lớn sẽ giúp bạn xua tan mọi cảm giác mệt mỏi, căng thẳng, đem lại cảm giác thoải mái sau khi hoạt động ngoài trời"
+        ,20.000);
+
+        LinkedList<VietnameseDelicacies> llMenuNuoc = new LinkedList<>();
+
+        llMenuNuoc.add(Menu);
+        llMenuNuoc.add(Menu1);
+        llMenuNuoc.add(Menu2);
+        llMenuNuoc.add(Menu3);
+        llMenuNuoc.add(Menu4);
+        llMenuNuoc.add(Menu5);
+        llMenuNuoc.add(Menu6);
 
 
-        com.example.test.Model.Location banhmiLocation = new com.example.test.Model.Location(10.421457,106.3372856);
-        Store store = new Store("CH01","Tuấn Kiệt","Bánh mì Tuấn kiệt",banhmiLocation,llMenuBanhMi);
+        com.example.test.Model.Location NuocLocation = new com.example.test.Model.Location(10.4246378,106.3290349);
+        Store store = new Store("CH05","Nguyễn Văn B","Sun Coffee",NuocLocation,llMenuNuoc);
 
-
+        StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(DashbroadMapActivity.this);
+        //storeDAOimplFirestore.addStore(store,llMenuNuoc);
 
 
     }
@@ -385,7 +412,6 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
             }
 
         });
-
 
 
 
