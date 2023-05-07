@@ -91,8 +91,11 @@ public class VietnameseDelicaciesimpl_Firestore implements VietnameseDelicaciesD
         });
     }
 
-    //Để giải quyết vấn đề này, bạn có thể sử dụng Task để đợi cho dữ liệu được
-    // trả về trước khi trả về danh sách DocumentID
+    /**
+     * Trả về một danh sách các DocumentID từ bộ sưu tập VietnameseDelicacies.
+     *
+     * @return một Task chứa một danh sách các DocumentID.
+     */
     public Task<List<String>> getDocumentIds() {
         List<String> list_VietnameseDelicaciesDocumentids = new ArrayList<>();
         Task<QuerySnapshot> task = VietnameseDelicaciesCollectionRef.get();
@@ -119,10 +122,11 @@ public class VietnameseDelicaciesimpl_Firestore implements VietnameseDelicaciesD
     }
 
 
-    /*
+
+    //Hàm này dùng để truy cập lấy VietnameseDelicacies từ "VietnameseDelicacies Collection trên firestore
     public Task<VietnameseDelicacies> getVietnameseDelicacies(String DocumentId) {
         Location location = new Location(0, 0);
-        VietnameseDelicacies[] vietnameseDelicacies = {new VietnameseDelicacies("", "", "", "", "")};
+        VietnameseDelicacies[] vietnameseDelicacies = {new VietnameseDelicacies("", "", "", "", "",0.0)};
 
         DocumentReference VietnameseDelicaciesDocumentRef = db.collection("VietnameseDelicacies Collection").document(DocumentId);
 
@@ -131,11 +135,13 @@ public class VietnameseDelicaciesimpl_Firestore implements VietnameseDelicaciesD
             public VietnameseDelicacies then(@NonNull @NotNull Task<DocumentSnapshot> task) throws Exception {
                 if (task.isSuccessful()) {
                     DocumentSnapshot documentSnapshot = task.getResult();
+
                     String _KieuMonAn = documentSnapshot.getString("_KieuMonAn");
                     String _TenMon = documentSnapshot.getString("_TenMon");
                     String _MieuTa = documentSnapshot.getString("_MieuTa");
                     String _HinhAnh = documentSnapshot.getString("_HinhAnh");
                     String _DiaPhuong = documentSnapshot.getString("_DiaPhuong");
+                   // Double _Price = Double.valueOf(documentSnapshot.getString("0"));
 
                     vietnameseDelicacies[0] = new VietnameseDelicacies(_KieuMonAn, _TenMon, _HinhAnh, _DiaPhuong, _MieuTa);
                     return vietnameseDelicacies[0];
@@ -151,5 +157,5 @@ public class VietnameseDelicaciesimpl_Firestore implements VietnameseDelicaciesD
 
     }
 
-     */
+
 }

@@ -3,33 +3,20 @@ package com.example.test.Presentation.Dashbroad;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.test.Data.StoreDAO.StoreDAOimpl_Firestore;
-import com.example.test.Data.StoreDAO.StoreDao;
-import com.example.test.Data.Vietnamese_Delicacies.VietnameseDelicaciesimpl_Firestore;
-import com.example.test.Model.Location;
-import com.example.test.Model.Store;
-import com.example.test.Presentation.DashbroadMap.DashbroadMapActivity;
+import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterIcon;
+import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterImage;
+import com.example.test.Presentation.Dashbroad.SeachView.SeachViewMonAn_VietnameseDilicacies_Store;
 import com.example.test.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

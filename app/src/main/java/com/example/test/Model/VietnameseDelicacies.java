@@ -9,6 +9,7 @@ public class VietnameseDelicacies {
 
     private double _Price;
 
+    //Dùng để chèn SeachView Store
     public VietnameseDelicacies(String KieuMonAn, String TenMon, String HinhAnh, String DiaPhuong, String MieuTa,double Price) {
         this._KieuMonAn = KieuMonAn;
         this._TenMon = TenMon;
@@ -17,6 +18,16 @@ public class VietnameseDelicacies {
         this._MieuTa = MieuTa;
         this._Price = Price;
     }
+
+    //Dùng để chèn SeachView ảo
+    public VietnameseDelicacies(String KieuMonAn, String TenMon, String HinhAnh, String DiaPhuong, String MieuTa){
+        this._KieuMonAn = KieuMonAn;
+        this._TenMon = TenMon;
+        this._HinhAnh = HinhAnh;
+        this._DiaPhuong = DiaPhuong;
+        this._MieuTa = MieuTa;
+    }
+
 
     public String get_KieuMonAn() {
         return _KieuMonAn;

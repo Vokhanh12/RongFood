@@ -1,4 +1,4 @@
-package com.example.test.Presentation.Dashbroad;
+package com.example.test.Presentation.Dashbroad.SeachView;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,12 +7,17 @@ import android.widget.ListView;
 
 import androidx.appcompat.widget.SearchView;
 import com.example.test.Data.StoreDAO.StoreDAOimpl_Firestore;
+import com.example.test.Data.StoreDAO.StoreDao;
 import com.example.test.Data.Vietnamese_Delicacies.VietnameseDelicaciesimpl_Firestore;
 import com.example.test.Model.MonAn_VietnameseDelicacies;
+import com.example.test.Model.Store;
 import com.example.test.Model.VietnameseDelicacies;
+import com.example.test.Presentation.Dashbroad.ListView.ListViewApdapterSeach;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class SeachViewMonAn_VietnameseDilicacies_Store {
@@ -32,10 +37,18 @@ public class SeachViewMonAn_VietnameseDilicacies_Store {
     private ArrayList<MonAn_VietnameseDelicacies> _arraylistMonAn = new ArrayList<>();
 
     public SeachViewMonAn_VietnameseDilicacies_Store(Context context, ListView listViewSeach, SearchView editsearch) {
-      /*  this._mContext = context;
+        this._mContext = context;
 
 
-        //Khởi tạo StoreDAOimpl_Firestore
+        //Đưa danh sách VietnamseDelicacies vào
+        addVietnameseDelicacies_SeachView(context, listViewSeach, editsearch);
+
+
+    }
+
+
+    private void addVietnameseDelicacies_SeachView(Context context, ListView listViewSeach, SearchView editsearch) {
+        //Khởi tạo StoreDAOimpl_Firestore //Đưa SeachView món ăn Ảo vào
         VietnameseDelicaciesimpl_Firestore vietnameseDelicaciesimplFirestore = new VietnameseDelicaciesimpl_Firestore(_mContext);
         vietnameseDelicaciesimplFirestore.getDocumentIds()
                 .addOnSuccessListener(new OnSuccessListener<List<String>>() {
@@ -95,7 +108,31 @@ public class SeachViewMonAn_VietnameseDilicacies_Store {
 
     }
 
-       */
+    private void addStore_seachView(Context context, ListView listViewSeach, SearchView editsearch){
+
+        StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(_mContext);
+
+        storeDAOimplFirestore.getDocumentIds()
+                .addOnSuccessListener(new OnSuccessListener<List<String>>() {
+                    @Override
+                    public void onSuccess(List<String> listStoreDocumentID) {
+
+                        for (String itemDocumentids : listStoreDocumentID){
+
+                            storeDAOimplFirestore.getDocumentIds(itemDocumentids)
+
+                        }
+                    }
+                });
+
     }
 
+
+
 }
+
+
+
+
+
+

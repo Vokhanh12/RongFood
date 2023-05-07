@@ -1,4 +1,4 @@
-package com.example.test.Presentation.Dashbroad;
+package com.example.test.Presentation.Dashbroad.RecycleView;
 
 import android.view.LayoutInflater;
 import android.view.View;
