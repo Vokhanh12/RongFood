@@ -1,36 +1,38 @@
-package com.example.test.Presentation.Dashbroad;
+package com.example.test.Presentation.Store;
 
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
-
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test.MainActivity;
+import com.example.test.Model.Menu;
+import com.example.test.Presentation.Dashbroad.ListView.ListViewApdapterSeach;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterIcon;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterImage;
 import com.example.test.Presentation.Dashbroad.SeachView.SeachViewMonAn_VietnameseDilicacies_Store;
 import com.example.test.Presentation.Store.BuyFood.BuyFoodActivity;
-import com.example.test.Presentation.Store.MenuActivity;
+import com.example.test.Presentation.Store.ListView.ListViewAdapterSearchMenu;
+import com.example.test.Presentation.Store.RecyclerView.MyAdapterImageMenu;
 import com.example.test.Presentation.Store.RecyclerView.NotificationActivity;
 import com.example.test.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashbroadActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
 
     private String TAG ="DashbroadActivity";
     private RecyclerView recyclerViewIcon;
     private RecyclerView recyclerViewImage;
-
+    private ListViewAdapterSearchMenu searchadapter;
     private ListView lvSearch;
 
     private SearchView etSearch;
@@ -67,18 +69,18 @@ public class DashbroadActivity extends AppCompatActivity {
 
                 switch (position){
                     case 0:
-                        Intent intent1 = new Intent(DashbroadActivity.this, MainActivity.class);
+                        Intent intent1 = new Intent(MenuActivity.this, MainActivity.class);
                         startActivity(intent1);
                         break;
                     case 1:
-                        Toast.makeText(DashbroadActivity.this,"icon 2",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MenuActivity.this,"icon 2",Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
-                        Intent intent3 = new Intent(DashbroadActivity.this, BuyFoodActivity.class);
+                        Intent intent3 = new Intent(MenuActivity.this, BuyFoodActivity.class);
                         startActivity(intent3);
                         break;
                     case 3:
-                        Intent intent4 = new Intent(DashbroadActivity.this, NotificationActivity.class);
+                        Intent intent4 = new Intent(MenuActivity.this, NotificationActivity.class);
                         startActivity(intent4);
                         break;
 
@@ -87,22 +89,24 @@ public class DashbroadActivity extends AppCompatActivity {
             }
         });
         recyclerViewIcon.setAdapter(adapterIcon);
-
-
-
         // Khởi tạo RecyclerView
         recyclerViewImage = findViewById(R.id.recycler_viewImage);
-        recyclerViewImage.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewImage.setLayoutManager(new GridLayoutManager(this, 2));
 
         // Khởi tạo MyAdapterImage và gán cho RecyclerView
-        List<String> imageUrlList = new ArrayList<>();
-        imageUrlList.add("https://vegafood.vn/storage/2022/02/939/mceu-67729456761643952103913.png");
-        imageUrlList.add("https://capherangxay.vn/wp-content/uploads/2020/04/Co-nen-kinh-doanh-do-uong-online-3.jpg");
-        imageUrlList.add("https://statics.vinpearl.com/quan-nuong-ngon-o-sai-gon-3%20(1)_1634616272.png");
+        List<Menu> imageUrlList = new ArrayList<>();
+        imageUrlList.add(new Menu("Sản phẩm 1", 10.0, "https://vegafood.vn/storage/2022/02/939/mceu-67729456761643952103913.png", 12));
+        imageUrlList.add(new Menu("Sản phẩm 1", 10.0, "https://vegafood.vn/storage/2022/02/939/mceu-67729456761643952103913.png", 12));
+        imageUrlList.add(new Menu("Sản phẩm 1", 10.0, "https://vegafood.vn/storage/2022/02/939/mceu-67729456761643952103913.png", 12));
+        imageUrlList.add(new Menu("Sản phẩm 1", 10.0, "https://vegafood.vn/storage/2022/02/939/mceu-67729456761643952103913.png", 12));
+        imageUrlList.add(new Menu("Sản phẩm 1", 10.0, "https://vegafood.vn/storage/2022/02/939/mceu-67729456761643952103913.png", 12));
+        imageUrlList.add(new Menu("Sản phẩm 1", 10.0, "https://vegafood.vn/storage/2022/02/939/mceu-67729456761643952103913.png", 12));
+        imageUrlList.add(new Menu("Sản phẩm 1", 10.0, "https://vegafood.vn/storage/2022/02/939/mceu-67729456761643952103913.png", 12));
+        imageUrlList.add(new Menu("Sản phẩm 1", 10.0, "https://vegafood.vn/storage/2022/02/939/mceu-67729456761643952103913.png", 12));
 
 
 
-        MyAdapterImage adapterImage = new MyAdapterImage(imageUrlList, new MyAdapterImage.OnItemClickListener() {
+        MyAdapterImageMenu adapterImage = new MyAdapterImageMenu(imageUrlList, new MyAdapterImageMenu.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 // Xử lý khi người dùng click vào một item
@@ -112,13 +116,25 @@ public class DashbroadActivity extends AppCompatActivity {
         recyclerViewImage.setAdapter(adapterImage);
 
 
-        SeachViewMonAn_VietnameseDilicacies_Store seachViewMonAn_vietnameseDilicacies_store = new SeachViewMonAn_VietnameseDilicacies_Store(DashbroadActivity.this,lvSearch,etSearch);
+        SeachViewMonAn_VietnameseDilicacies_Store seachViewMonAn_vietnameseDilicacies_store = new SeachViewMonAn_VietnameseDilicacies_Store(MenuActivity.this,lvSearch,etSearch);
+        etSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchadapter.getFilter().filter(query);
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchadapter.getFilter().filter(newText);
+                return false;
+            }
+        });
         etSearch.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus){
-                  lvSearch.setVisibility(View.VISIBLE);
+                    lvSearch.setVisibility(View.VISIBLE);
                 }
                 else
                 {
@@ -126,15 +142,5 @@ public class DashbroadActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
-
-
-
-
-
-
-
-
 }

@@ -119,7 +119,7 @@ public class SeachViewMonAn_VietnameseDilicacies_Store {
 
                         for (String itemDocumentids : listStoreDocumentID){
 
-                            storeDAOimplFirestore.getDocumentIds(itemDocumentids)
+                            //storeDAOimplFirestore.getDocumentIds(itemDocumentids);
 
                         }
                     }

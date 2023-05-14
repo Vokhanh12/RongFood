@@ -22,6 +22,8 @@ import com.example.test.Data.AccountDAO.AccountDAOImpl_SQLite;
 import com.example.test.Model.Account;
 import com.example.test.Presentation.Dashbroad.DashbroadActivity;
 import com.example.test.Presentation.DashbroadMap.DashbroadMapActivity;
+import com.example.test.Presentation.DashbroadShop.DashbroadShopActivity;
+import com.example.test.Presentation.Store.MenuActivity;
 import com.example.test.SystemConfig.storeFirebase;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import org.osmdroid.api.IMapController;
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         btnMap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DashbroadActivity.class);
+                Intent intent = new Intent(MainActivity.this, DashbroadShopActivity.class);
                 startActivity(intent);
                 //Kết thúc form cũ
                 finish();
