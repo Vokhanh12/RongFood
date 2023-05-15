@@ -20,10 +20,19 @@ public class StoreDAOimpl_Firestore implements StoreDao {
     private FirebaseFirestore db;
     private CollectionReference storeCollection;
 
+    private DocumentIdCallback callback;
+
     public StoreDAOimpl_Firestore(Context context) {
         this._mContext = context;
         this.db = FirebaseFirestore.getInstance();
         this.storeCollection = db.collection("Stores");
+    }
+
+    public StoreDAOimpl_Firestore(Context context,DocumentIdCallback Callback) {
+        this._mContext = context;
+        this.db = FirebaseFirestore.getInstance();
+        this.storeCollection = db.collection("Stores");
+        this.callback = Callback;
     }
 
 
@@ -131,6 +140,21 @@ public class StoreDAOimpl_Firestore implements StoreDao {
 
     }
 
+    @Override
+    public void getDocumentIdByTenCHMaCH(String MaCH, String TenCH, DocumentIdCallback callback) {
+        Query query = storeCollection.whereEqualTo("_MaCH", MaCH).whereEqualTo("_TenCH", TenCH);
+        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot querySnapshot) {
+                for (DocumentSnapshot document : querySnapshot.getDocuments()) {
+                    String documentId = document.getId();
+                    callback.onDocumentIdReceived(documentId);
+                    return;
+                }
+                callback.onDocumentIdReceived(null);
+            }
+        });
+    }
 
 
     public Task<Store> getStore(String DocumentId) {

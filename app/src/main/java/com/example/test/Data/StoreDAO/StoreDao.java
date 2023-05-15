@@ -12,6 +12,8 @@ public interface StoreDao {
     public void updateStore(Store store,VietnameseDelicacies vietnameseDelicacies,String DocumentID);
     public void deleteStore(Store store);
 
+    public void getDocumentIdByTenCHMaCH(String MaCH,String TenCH,DocumentIdCallback callback);
+
     public Task<Store> getStore(String DocumentId);
 
     public Task<List<String>> getDocumentIds();

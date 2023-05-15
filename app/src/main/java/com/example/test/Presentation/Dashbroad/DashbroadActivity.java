@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test.MainActivity;
+import com.example.test.Model.ShopView;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterIcon;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterImage;
 import com.example.test.Presentation.Dashbroad.SeachView.SeachViewMonAn_VietnameseDilicacies_Store;
@@ -95,10 +96,7 @@ public class DashbroadActivity extends AppCompatActivity {
         recyclerViewImage.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         // Khởi tạo MyAdapterImage và gán cho RecyclerView
-        List<String> imageUrlList = new ArrayList<>();
-        imageUrlList.add("https://vegafood.vn/storage/2022/02/939/mceu-67729456761643952103913.png");
-        imageUrlList.add("https://capherangxay.vn/wp-content/uploads/2020/04/Co-nen-kinh-doanh-do-uong-online-3.jpg");
-        imageUrlList.add("https://statics.vinpearl.com/quan-nuong-ngon-o-sai-gon-3%20(1)_1634616272.png");
+        List<ShopView> imageUrlList = new ArrayList<>();
 
 
 

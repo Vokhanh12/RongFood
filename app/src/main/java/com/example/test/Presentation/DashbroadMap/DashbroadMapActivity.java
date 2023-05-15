@@ -2,6 +2,7 @@ package com.example.test.Presentation.DashbroadMap;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.*;
 import android.util.Log;
@@ -20,8 +21,10 @@ import androidx.preference.PreferenceManager;
 import com.example.test.Data.AccountDAO.AccountDAOimpl_FireAuth;
 import com.example.test.Data.StoreDAO.StoreDAOimpl_Firestore;
 import com.example.test.Data.Vietnamese_Delicacies.VietnameseDelicaciesimpl_Firestore;
+import com.example.test.Functionality.Functionality;
 import com.example.test.Model.Store;
 import com.example.test.Model.VietnameseDelicacies;
+import com.example.test.Presentation.DashbroadShop.DashbroadShopActivity;
 import com.example.test.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,6 +41,7 @@ import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.OverlayItem;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -70,6 +74,9 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
     private int i = 0;
 
     private ListView listViewSeach;
+
+    //Load the Stores in the Map
+    private ArrayList<OverlayItem> arlItemStores = new ArrayList<>();
 
 
     //Account account = new Account("khanhyou2024@gmail.com","abc@123");
@@ -170,6 +177,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
 
                 //vietnameseDelicaciesimplFirestore.getDocumentCount();
 
+                //Used to add
                 /*
                 try {
 
@@ -229,7 +237,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
 
         AccountDAOimpl_FireAuth accountDAOimplFirestore = new AccountDAOimpl_FireAuth(this);
 
-
+        //Used to add
         //Đăng ký tài khoảng
         //accountDAOimplFirestore.addAccount(account);
         //Thêm vào Firestore Database
@@ -238,7 +246,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         // locationDAOimplFirestore.addLocation(location1);
 
 
-        VietnameseDelicacies Menu = new VietnameseDelicacies("Cafe","Cafe pha phin"
+       /* VietnameseDelicacies Menu = new VietnameseDelicacies("Cafe","Cafe pha phin"
                 ,"https://websitecukcukvn.misacdn.net/wp-content/uploads/2019/04/cafe-pha-phin-768x570.jpg"
                 ,"Tiền Giang","Cafe – thứ thức uống vô cùng quan trọng và sẽ là món đồ uống chủ đạo đối với quán cafe truyền thống. Theo thống kê, cafe chiếm gần 50% tổng doanh thu của quán. Bạn có thể thấy trên thị trường có rất nhiều loại cafe từ truyền thống đến cafe phương tây nhưng phổ biến nhất là cafe đen, cafe sữa. Cafe được trồng trên mảnh đất Tây Nguyên – Quê hương của những hạt cafe nguyên chất."
         ,20.000);
@@ -292,6 +300,8 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(DashbroadMapActivity.this);
         //storeDAOimplFirestore.addStore(store,llMenuNuoc);
 
+        */
+
 
     }
 
@@ -308,52 +318,50 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         mapController.setZoom(18.0);
         mapController.setCenter(startPoint);
 
-        //Load the Stores in the Map
-        ArrayList<OverlayItem> arlItemStores = new ArrayList<>();
+
 
         StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(DashbroadMapActivity.this);
-        storeDAOimplFirestore.getDocumentIds()
-                .addOnSuccessListener(new OnSuccessListener<List<String>>() {
-                    @Override
-                    public void onSuccess(List<String> list_storeDocumentids) {
+        storeDAOimplFirestore.getDocumentIds().addOnSuccessListener(new OnSuccessListener<List<String>>() {
+            @Override
+            public void onSuccess(List<String> list_storeDocumentids) {
+                for (String itemListDocumentIds : list_storeDocumentids) {
+                    storeDAOimplFirestore.getStore(itemListDocumentIds).addOnSuccessListener(new OnSuccessListener<Store>() {
+                        @Override
+                        public void onSuccess(Store store) {
+                            ArrayList<Functionality> tempOverlayItems = new ArrayList<>();
+                            com.example.test.Model.Location locationStore = store.get_location();
+                            CustomOverlayItem customOverlayItem = new CustomOverlayItem(store, store.getTenCH(), store.get_NguoiSoHu(), new GeoPoint(locationStore.getLatitude(), locationStore.getLongitude()));
+                            arlItemStores.add(customOverlayItem);
 
-                        for (String itemList : list_storeDocumentids) {
-
-                            storeDAOimplFirestore.getStore(itemList).addOnSuccessListener(new OnSuccessListener<Store>() {
+                            ItemizedOverlayWithFocus<OverlayItem> mOverlayStores = new ItemizedOverlayWithFocus<>(getApplicationContext(), arlItemStores, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                                 @Override
-                                public void onSuccess(Store store) {
-                                    com.example.test.Model.Location locationStore = store.get_location();
-                                    arlItemStores.add(new OverlayItem(store.getTenCH(), store.get_NguoiSoHu()
-                                            , new GeoPoint(locationStore.getLatitude(), locationStore.getLongitude())));
-
-                                    ItemizedOverlayWithFocus<OverlayItem> mOverlayStores = new ItemizedOverlayWithFocus<>(getApplicationContext(),
-                                            arlItemStores, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
-                                        @Override
-                                        public boolean onItemSingleTapUp(int index, OverlayItem item) {
-                                            return false;
-                                        }
-
-                                        @Override
-                                        public boolean onItemLongPress(int index, OverlayItem item) {
-                                            return false;
-                                        }
+                                public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                                    CustomOverlayItem customOverlayItem = (CustomOverlayItem) item;
+                                    Store storeData = customOverlayItem.getStoreData();
 
 
-                                    });
+                                    if (storeData != null) {
+                                        Intent intent = new Intent(DashbroadMapActivity.this, DashbroadShopActivity.class);
+                                       intent.putExtra("storeData", storeData);
+                                        startActivity(intent);
+                                    }
 
-                                    mOverlayStores.setFocusItemsOnTap(true);
-                                    map.getOverlays().add(mOverlayStores);
+                                    return true;
+                                }
 
-
+                                @Override
+                                public boolean onItemLongPress(int index, OverlayItem item) {
+                                    return false;
                                 }
                             });
 
-
+                            mOverlayStores.setFocusItemsOnTap(true);
+                            map.getOverlays().add(mOverlayStores);
                         }
-                    }
-                });
-
-
+                    });
+                }
+            }
+        });
         //Add current my Location
 
         ArrayList<OverlayItem> arlOverlayMyLocation = new ArrayList<>();
@@ -492,6 +500,9 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
     public void onStatusChanged(String provider, int status, Bundle extras) {
         // TODO: handle status changes
     }
+
+
+
 
 
 }
