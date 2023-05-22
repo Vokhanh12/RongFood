@@ -22,10 +22,13 @@
             android:usesCleartextTraffic="true"
             tools:targetApi="31">
         <activity
-                android:name=".Presentation.DashbroadShop.DashbroadShopActivity"
-                android:label="helloworld"
-                android:theme="@style/Theme.Test.FullScreen.NoActionBar"
+                android:name=".Presentation.DashbroadShop.BuyShop.BuyShopActivity"
                 android:exported="false"/>
+        <activity
+                android:name=".Presentation.DashbroadShop.DashbroadShopActivity"
+                android:exported="false"
+                android:label="helloworld"
+                android:theme="@style/Theme.Test.FullScreen.NoActionBar"/>
         <activity
                 android:name=".Presentation.Store.ListView.ListViewAdapterSearchMenu"
                 android:exported="false"/>

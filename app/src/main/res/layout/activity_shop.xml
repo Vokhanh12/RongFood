@@ -58,8 +58,8 @@
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginTop="55dp"
+                    android:layout_marginEnd="-5dp"
+                    android:layout_marginTop="53dp"
                     android:nestedScrollingEnabled="true"/>
             <ListView
                     android:id="@+id/listnameFood"
