@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         btnMap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, BuyShopActivity.class);
+                Intent intent = new Intent(MainActivity.this, DashbroadMapActivity.class);
                 startActivity(intent);
                 //Kết thúc form cũ
                 finish();

@@ -40,13 +40,13 @@ public class MyAdapterImage extends RecyclerView.Adapter<MyAdapterImage.MyViewHo
     public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, int position) {
         ShopView shopView = shopViewList.get(position);
 
-        holder.nameTextView.setText(shopView.getNameFood());
-        holder.priceTextView.setText(String.valueOf(shopView.getPrice()));
+        holder.nameTextView.setText(shopView.get_dishName());
+        holder.priceTextView.setText(String.valueOf(shopView.get_price()));
 
         // Use an image loading library like Glide or Picasso to load the image into the ImageView.
         // Here, we're just setting a placeholder image.
         Glide.with(holder.itemView.getContext())
-                .load(shopView.getUlrImage())
+                .load(shopView.get_ulrImage())
                 .placeholder(R.drawable.backgroundmonan) // set placeholder image
                 .into(holder.imageView);
     }

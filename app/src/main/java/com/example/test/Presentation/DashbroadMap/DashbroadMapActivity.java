@@ -367,7 +367,6 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
         mapController.setCenter(startPoint);
 
 
-
         StoreDAOimpl_Firestore storeDAOimplFirestore = new StoreDAOimpl_Firestore(DashbroadMapActivity.this);
         storeDAOimplFirestore.getDocumentIds().addOnSuccessListener(new OnSuccessListener<List<String>>() {
             @Override
@@ -390,7 +389,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
 
                                     if (storeData != null) {
                                         Intent intent = new Intent(DashbroadMapActivity.this, DashbroadShopActivity.class);
-                                       intent.putExtra("storeData", storeData);
+                                        intent.putExtra("storeData_ShowInShop", storeData);
                                         startActivity(intent);
                                     }
 
@@ -447,7 +446,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
             @Override
             public void onSuccess(Store store) {
 
-                com.example.test.Model.Location LocationEnd = new com.example.test.Model.Location(store.get_location().getLatitude(),store.get_location().getLongitude());
+                com.example.test.Model.Location LocationEnd = new com.example.test.Model.Location(store.get_location().getLatitude(), store.get_location().getLongitude());
 
                 com.example.test.Model.Location locationStart = new com.example.test.Model.Location(10.3607416, 106.6777139);
                 //com.example.test.Model.Location locationEnd = store.get_location();
@@ -462,9 +461,6 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
             }
 
         });
-
-
-
 
 
     }
@@ -548,9 +544,6 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
     public void onStatusChanged(String provider, int status, Bundle extras) {
         // TODO: handle status changes
     }
-
-
-
 
 
 }

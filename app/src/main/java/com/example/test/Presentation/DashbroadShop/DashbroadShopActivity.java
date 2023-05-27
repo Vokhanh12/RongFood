@@ -25,6 +25,8 @@ import com.example.test.Model.VietnameseDelicacies;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterIcon;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterImage;
 import com.example.test.Presentation.Dashbroad.SeachView.SeachViewMonAn_VietnameseDilicacies_Store;
+import com.example.test.Presentation.DashbroadMap.DashbroadMapActivity;
+import com.example.test.Presentation.DashbroadShop.BuyShop.BuyShopActivity;
 import com.example.test.Presentation.DashbroadShop.RecycleView.GridSpacingItemDecoration;
 import com.example.test.Presentation.DashbroadShop.RecycleView.VerticalSpaceItemDecoration;
 import com.example.test.Presentation.Store.BuyFood.BuyFoodActivity;
@@ -119,8 +121,8 @@ public class DashbroadShopActivity extends AppCompatActivity {
         storeDAOimplFirestore = new StoreDAOimpl_Firestore(DashbroadShopActivity.this);
         //Chuyển Dữ liệu từ DashbroadMapActivity
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("storeData")) {
-            Store storeData = intent.getParcelableExtra("storeData");
+        if (intent != null && intent.hasExtra("storeData_ShowInShop")) {
+            Store storeData = intent.getParcelableExtra("storeData_ShowInShop");
             Log.d(TAG,"TEST:"+storeData.get_TenCH()+"&"+storeData.get_TenCH());
             // Sử dụng dữ liệu storeData ở đây
 
@@ -136,26 +138,41 @@ public class DashbroadShopActivity extends AppCompatActivity {
                                     LinkedList<VietnameseDelicacies> llMenu = store.get_llMenu();
 
                                     // Khởi tạo MyAdapterImage và gán cho RecyclerView
-                                    List<ShopView> ShopViewList = new ArrayList<>();
+                                    List<ShopView> ShopViewList_ShowInShop = new ArrayList<>();
+                                    List<ShopView> ShopViewList_ShowInDescriptionShop =new ArrayList<>();
 
                                     for (VietnameseDelicacies delicacy : llMenu) {
                                         String tenMon = delicacy.get_TenMon();
+                                        String kieumonan = delicacy.get_KieuMonAn();
+                                        String diaphuong = delicacy.get_DiaPhuong();
+                                        String mieuta = delicacy.get_MieuTa();
                                         String hinhAnh = delicacy.get_HinhAnh();
                                         double price = delicacy.get_Price();
 
-                                        // Tạo đối tượng ShopView từ thông tin lấy được và thêm vào ShopViewList
+                                        // Tạo đối tượng ShopView từ thông tin lấy được và thêm vào ShopViewList_ShowInShop
                                         ShopView shopView = new ShopView(tenMon, price, hinhAnh);
-                                        ShopViewList.add(shopView);
+                                        ShopViewList_ShowInShop.add(shopView);
+
+                                        // Tạo đối tượng ShopView từ thông tin lấy được và thêm vào ShopViewList_ShowInDescriptionShop
+                                        ShopView shopView1 = new ShopView(tenMon,hinhAnh,diaphuong,kieumonan,mieuta,price);
+                                        ShopViewList_ShowInDescriptionShop.add(shopView1);
+
                                     }
 
 
-                                    MyAdapterImage adapterImage = new MyAdapterImage(ShopViewList, new MyAdapterImage.OnItemClickListener() {
+                                    MyAdapterImage adapterImage = new MyAdapterImage(ShopViewList_ShowInShop , new MyAdapterImage.OnItemClickListener() {
                                         @Override
                                         public void onItemClick(int position) {
                                             // Xử lý khi người dùng click vào một item
                                             for(int i = 0; i < llMenu.size(); i++){
                                                 if(position == i){
-                                                    Log.d(TAG,"Hình "+i);
+
+                                                    VietnameseDelicacies vietnameseDelicacies =llMenu.get(i);
+
+                                                    Intent intent_toBuyShop = new Intent(DashbroadShopActivity.this, BuyShopActivity.class);
+                                                    intent_toBuyShop.putExtra("storedata_ShowItemInShop",vietnameseDelicacies);
+                                                    startActivity(intent_toBuyShop);
+
                                                 }
 
                                             }

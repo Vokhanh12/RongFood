@@ -7,29 +7,84 @@
         android:layout_height="match_parent"
         tools:context=".Presentation.DashbroadShop.BuyShop.BuyShopActivity">
 
-
-    <LinearLayout
-            android:id="@+id/layoutTop"
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/layoutBottom">
-
         <LinearLayout
+                android:id="@+id/layoutTop"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/layoutBottom">
+
+
+                <ImageView
+                        android:id="@+id/ivSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        android:src="@drawable/caiquan"
+                        android:scaleType="centerCrop">
+                </ImageView>
+
+                <TextView
+                        android:id="@+id/tvSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tên Sản Phẩm"
+                        android:gravity="left"
+                        android:textSize="25dp"
+                        android:textColor="#121214"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="5dp">
+
+                </TextView>
+
+                <TextView
+                        android:id="@+id/tvPriceSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Giá sản phẩm"
+                        android:gravity="right"
+                        android:textSize="25dp"
+                        android:textColor="#fc1403"
+                        android:paddingTop="10dp"
+                        android:paddingRight="30dp">
+
+                </TextView>
+
+                <TextView
+                        android:id="@+id/tvKieuSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Kiểu Sản phẩm"
+                        android:textSize="20dp"
+                        android:paddingTop="10dp">
+
+                </TextView>
+
+                <TextView
+                        android:id="@+id/tvMieuTaSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Miêu tả"
+                        android:textSize="20dp">
+
+                </TextView>
+                <TextView
+                        android:id="@+id/tvDiaPhuongSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Địa phương sản phẩm"
+                        android:textSize="20dp">
+
+                </TextView>
 
         </LinearLayout>
 
-       <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
-
-       </LinearLayout>
-
-
-    </LinearLayout>
+    </ScrollView>
 
 
 

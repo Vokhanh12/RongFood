@@ -1,6 +1,10 @@
 package com.example.test.Model;
 
-public class VietnameseDelicacies {
+import android.os.Parcel;
+import android.os.Parcelable;
+import androidx.annotation.NonNull;
+
+public class VietnameseDelicacies  implements Parcelable {
     private String _KieuMonAn;
     private String _TenMon;
     private String _HinhAnh;
@@ -27,6 +31,45 @@ public class VietnameseDelicacies {
         this._DiaPhuong = DiaPhuong;
         this._MieuTa = MieuTa;
     }
+
+
+    protected VietnameseDelicacies(Parcel in) {
+        _KieuMonAn = in.readString();
+        _TenMon = in.readString();
+        _HinhAnh = in.readString();
+        _DiaPhuong = in.readString();
+        _MieuTa = in.readString();
+        _Price = in.readDouble();
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+
+        dest.writeString(_KieuMonAn);
+        dest.writeString(_TenMon);
+        dest.writeString(_HinhAnh);
+        dest.writeString(_DiaPhuong);
+        dest.writeString(_MieuTa);
+
+    }
+
+    public static final Parcelable.Creator<VietnameseDelicacies> CREATOR = new Creator<VietnameseDelicacies>() {
+        @Override
+        public VietnameseDelicacies createFromParcel(Parcel in) {
+            return new VietnameseDelicacies(in);
+        }
+
+        @Override
+        public VietnameseDelicacies[] newArray(int size) {
+            return new VietnameseDelicacies[size];
+        }
+    };
 
 
     public String get_KieuMonAn() {
@@ -72,5 +115,6 @@ public class VietnameseDelicacies {
     }
 
     public void set_Price(double _Price) {this._Price = _Price;}
+
 
 }
