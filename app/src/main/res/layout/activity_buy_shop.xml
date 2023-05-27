@@ -22,7 +22,7 @@
 
 
                 <ImageView
-                        android:id="@+id/ivSP"
+                        android:id="@+id/ivPictureSP"
                         android:layout_width="match_parent"
                         android:layout_height="350dp"
                         android:src="@drawable/caiquan"
@@ -30,11 +30,11 @@
                 </ImageView>
 
                 <TextView
-                        android:id="@+id/tvSP"
+                        android:id="@+id/tvTenSP"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Tên Sản Phẩm"
-                        android:gravity="left"
+                        android:gravity="center"
                         android:textSize="25dp"
                         android:textColor="#121214"
                         android:paddingTop="10dp"
@@ -43,7 +43,7 @@
                 </TextView>
 
                 <TextView
-                        android:id="@+id/tvPriceSP"
+                        android:id="@+id/tvGiaSP"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Giá sản phẩm"
@@ -61,26 +61,34 @@
                         android:layout_height="wrap_content"
                         android:text="Kiểu Sản phẩm"
                         android:textSize="20dp"
-                        android:paddingTop="10dp">
+                        android:textColor="#434543"
+                        android:paddingTop="10dp"
+                        android:padding="5dp">
 
                 </TextView>
 
-                <TextView
-                        android:id="@+id/tvMieuTaSP"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Miêu tả"
-                        android:textSize="20dp">
 
-                </TextView>
                 <TextView
                         android:id="@+id/tvDiaPhuongSP"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Địa phương sản phẩm"
-                        android:textSize="20dp">
+                        android:textSize="20dp"
+                        android:textColor="#434543"
+                        android:padding="5dp">
 
                 </TextView>
+
+            <TextView
+                    android:id="@+id/tvMieuTaSP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Miêu tả"
+                    android:textSize="20dp"
+                    android:textColor="#434543"
+                    android:padding="5dp">
+
+            </TextView>
 
         </LinearLayout>
 

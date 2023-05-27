@@ -188,6 +188,8 @@ public class DashbroadShopActivity extends AppCompatActivity {
             });
 
 
+        }else{
+            Log.d(TAG,"Không tìm thấy intent storeData_ShowInShop ");
         }
 
 

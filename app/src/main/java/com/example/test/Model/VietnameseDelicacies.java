@@ -56,6 +56,7 @@ public class VietnameseDelicacies  implements Parcelable {
         dest.writeString(_HinhAnh);
         dest.writeString(_DiaPhuong);
         dest.writeString(_MieuTa);
+        dest.writeDouble(_Price);
 
     }
 
