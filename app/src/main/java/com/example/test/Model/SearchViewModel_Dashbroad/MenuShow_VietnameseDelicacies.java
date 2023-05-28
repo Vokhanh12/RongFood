@@ -1,12 +1,12 @@
-package com.example.test.Model;
+package com.example.test.Model.SearchViewModel_Dashbroad;
 
 import androidx.annotation.NonNull;
 import org.jetbrains.annotations.NotNull;
 
-public class MonAn_VietnameseDelicacies {
+public class MenuShow_VietnameseDelicacies {
 
     private String _MonAn;
-    public MonAn_VietnameseDelicacies(String MonAn){
+    public MenuShow_VietnameseDelicacies(String MonAn){
         this._MonAn = MonAn;
 
     }

@@ -17,10 +17,7 @@ import com.example.test.MainActivity;
 import com.example.test.Model.ShopView;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterIcon;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterImage;
-import com.example.test.Presentation.Dashbroad.SeachView.SeachViewMonAn_VietnameseDilicacies_Store;
-import com.example.test.Presentation.Store.BuyFood.BuyFoodActivity;
-import com.example.test.Presentation.Store.MenuActivity;
-import com.example.test.Presentation.Store.RecyclerView.NotificationActivity;
+import com.example.test.Presentation.Dashbroad.SeachView.Show_VietnameseDilicacies_Store;
 import com.example.test.R;
 
 import java.util.ArrayList;
@@ -75,12 +72,10 @@ public class DashbroadActivity extends AppCompatActivity {
                         Toast.makeText(DashbroadActivity.this,"icon 2",Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
-                        Intent intent3 = new Intent(DashbroadActivity.this, BuyFoodActivity.class);
-                        startActivity(intent3);
+
                         break;
                     case 3:
-                        Intent intent4 = new Intent(DashbroadActivity.this, NotificationActivity.class);
-                        startActivity(intent4);
+
                         break;
 
                 }
@@ -110,7 +105,8 @@ public class DashbroadActivity extends AppCompatActivity {
         recyclerViewImage.setAdapter(adapterImage);
 
 
-        SeachViewMonAn_VietnameseDilicacies_Store seachViewMonAn_vietnameseDilicacies_store = new SeachViewMonAn_VietnameseDilicacies_Store(DashbroadActivity.this,lvSearch,etSearch);
+        //Đưa danh sách VietnameseDelicacies dùng hiển thị dữ liệu ảo cho SearchView
+        Show_VietnameseDilicacies_Store seachViewMonAn_vietnameseDilicacies_store = new Show_VietnameseDilicacies_Store(DashbroadActivity.this,lvSearch,etSearch);
 
         etSearch.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

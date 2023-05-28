@@ -24,7 +24,6 @@ import com.example.test.Presentation.Dashbroad.DashbroadActivity;
 import com.example.test.Presentation.DashbroadMap.DashbroadMapActivity;
 import com.example.test.Presentation.DashbroadShop.BuyShop.BuyShopActivity;
 import com.example.test.Presentation.DashbroadShop.DashbroadShopActivity;
-import com.example.test.Presentation.Store.MenuActivity;
 import com.example.test.SystemConfig.storeFirebase;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import org.osmdroid.api.IMapController;

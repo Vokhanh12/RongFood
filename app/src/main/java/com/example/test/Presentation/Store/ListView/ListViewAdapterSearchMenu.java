@@ -1,8 +1,5 @@
 package com.example.test.Presentation.Store.ListView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,28 +8,26 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import com.example.test.Model.MonAn_VietnameseDelicacies;
+import com.example.test.Model.SearchViewModel_Dashbroad.MenuShow_VietnameseDelicacies;
 import com.example.test.R;
 
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 
 public class ListViewAdapterSearchMenu extends BaseAdapter implements Filterable {
 
     Context _mContext;
     LayoutInflater _inflater;
-    private List<MonAn_VietnameseDelicacies> _listMonAn = null;
-    private ArrayList<MonAn_VietnameseDelicacies> _arraylistMonAn;
+    private List<MenuShow_VietnameseDelicacies> _listMonAn = null;
+    private ArrayList<MenuShow_VietnameseDelicacies> _arraylistMonAn;
 
-    public ListViewAdapterSearchMenu(Context context,List<MonAn_VietnameseDelicacies>listMonAn){
+    public ListViewAdapterSearchMenu(Context context,List<MenuShow_VietnameseDelicacies>listMonAn){
         this._mContext = context;
         this._listMonAn =listMonAn;
         this._inflater = LayoutInflater.from(_mContext);
-        this._arraylistMonAn = new ArrayList<MonAn_VietnameseDelicacies>();
+        this._arraylistMonAn = new ArrayList<MenuShow_VietnameseDelicacies>();
         this._arraylistMonAn.addAll(_listMonAn);
     }
 
@@ -50,7 +45,7 @@ public class ListViewAdapterSearchMenu extends BaseAdapter implements Filterable
     }
 
     @Override
-    public MonAn_VietnameseDelicacies getItem(int position) {
+    public MenuShow_VietnameseDelicacies getItem(int position) {
         return _listMonAn.get(position);
     }
 
@@ -88,17 +83,17 @@ public class ListViewAdapterSearchMenu extends BaseAdapter implements Filterable
                 if (searchTerm.isEmpty()) {
                     return new FilterResults(); // trả về danh sách ban đầu nếu searchTerm trống
                 } else {
-                    List<MonAn_VietnameseDelicacies> resultList = new ArrayList<>();
+                    List<MenuShow_VietnameseDelicacies> resultList = new ArrayList<>();
                     // Sắp xếp danh sách món ăn để tìm kiếm nhị phân
-                    Collections.sort(_arraylistMonAn, new Comparator<MonAn_VietnameseDelicacies>() {
+                    Collections.sort(_arraylistMonAn, new Comparator<MenuShow_VietnameseDelicacies>() {
                         @Override
-                        public int compare(MonAn_VietnameseDelicacies o1, MonAn_VietnameseDelicacies o2) {
+                        public int compare(MenuShow_VietnameseDelicacies o1, MenuShow_VietnameseDelicacies o2) {
                             return o1.get_MonAn().toLowerCase().compareTo(o2.get_MonAn().toLowerCase());
                         }
                     });
-                    int index = Collections.binarySearch(_arraylistMonAn, new MonAn_VietnameseDelicacies(searchTerm), new Comparator<MonAn_VietnameseDelicacies>() {
+                    int index = Collections.binarySearch(_arraylistMonAn, new MenuShow_VietnameseDelicacies(searchTerm), new Comparator<MenuShow_VietnameseDelicacies>() {
                         @Override
-                        public int compare(MonAn_VietnameseDelicacies o1, MonAn_VietnameseDelicacies o2) {
+                        public int compare(MenuShow_VietnameseDelicacies o1, MenuShow_VietnameseDelicacies o2) {
                             return o1.get_MonAn().toLowerCase().compareTo(o2.get_MonAn().toLowerCase());
                         }
                     });
@@ -110,7 +105,7 @@ public class ListViewAdapterSearchMenu extends BaseAdapter implements Filterable
                     int startPos = index;
 
                     do {
-                        MonAn_VietnameseDelicacies item = _arraylistMonAn.get(index++);
+                        MenuShow_VietnameseDelicacies item = _arraylistMonAn.get(index++);
                         if (item.get_MonAn().toLowerCase().contains(searchTerm)) { // Nếu món ăn tìm thấy chứa searchTerm
                             resultList.add(item); // Thêm món ăn vào danh sách kết quả
                             if (index == _arraylistMonAn.size()) { // Chạy hết danh sách, thoát vòng lặp
@@ -131,7 +126,7 @@ public class ListViewAdapterSearchMenu extends BaseAdapter implements Filterable
             @SuppressWarnings("unchecked")
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                _listMonAn = (List<MonAn_VietnameseDelicacies>) results.values;
+                _listMonAn = (List<MenuShow_VietnameseDelicacies>) results.values;
                 notifyDataSetChanged(); // Cập nhật ListView
             }
         };

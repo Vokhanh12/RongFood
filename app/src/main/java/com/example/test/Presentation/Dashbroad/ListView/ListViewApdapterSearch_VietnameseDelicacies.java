@@ -6,26 +6,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.example.test.Model.MonAn_VietnameseDelicacies;
+import com.example.test.Model.SearchViewModel_Dashbroad.MenuShow_Store;
+import com.example.test.Model.SearchViewModel_Dashbroad.MenuShow_VietnameseDelicacies;
 import com.example.test.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class ListViewApdapterSeach extends BaseAdapter {
+public class ListViewApdapterSearch_VietnameseDelicacies extends BaseAdapter {
 
     Context _mContext;
     LayoutInflater _inflater;
-    private List<MonAn_VietnameseDelicacies> _listMonAn = null;
-    private ArrayList<MonAn_VietnameseDelicacies> _arraylistMonAn;
+    private List<MenuShow_VietnameseDelicacies> _listMenu_VietnameseDelicacies = null;
 
-    public ListViewApdapterSeach(Context context,List<MonAn_VietnameseDelicacies>listMonAn){
+    private ArrayList<MenuShow_VietnameseDelicacies> _arraylistMenu_VietnameseDelicacies;
+
+
+    public ListViewApdapterSearch_VietnameseDelicacies(Context context, List<MenuShow_VietnameseDelicacies>listMenu_VietnameseDelicacies){
         this._mContext = context;
-        this._listMonAn =listMonAn;
+        this._listMenu_VietnameseDelicacies = listMenu_VietnameseDelicacies;
         this._inflater = LayoutInflater.from(_mContext);
-        this._arraylistMonAn = new ArrayList<MonAn_VietnameseDelicacies>();
-        this._arraylistMonAn.addAll(_listMonAn);
+        this._arraylistMenu_VietnameseDelicacies = new ArrayList<MenuShow_VietnameseDelicacies>();
+        this._arraylistMenu_VietnameseDelicacies.addAll(_listMenu_VietnameseDelicacies);
     }
 
 
@@ -36,12 +39,12 @@ public class ListViewApdapterSeach extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return _listMonAn.size();
+        return _listMenu_VietnameseDelicacies.size();
     }
 
     @Override
-    public MonAn_VietnameseDelicacies getItem(int position) {
-        return _listMonAn.get(position);
+    public MenuShow_VietnameseDelicacies getItem(int position) {
+        return _listMenu_VietnameseDelicacies.get(position);
     }
 
     @Override
@@ -62,20 +65,20 @@ public class ListViewApdapterSeach extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
         // Set the results into TextViews
-        holder.name.setText(_listMonAn.get(position).get_MonAn());
+        holder.name.setText(_listMenu_VietnameseDelicacies.get(position).get_MonAn());
         return view;
     }
 
     // Filter Class
     public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
-        _listMonAn.clear();
+        _listMenu_VietnameseDelicacies.clear();
         if (charText.length() == 0) {
-            _listMonAn.addAll(_arraylistMonAn);
+            _listMenu_VietnameseDelicacies.addAll(_arraylistMenu_VietnameseDelicacies);
         } else {
-            for (MonAn_VietnameseDelicacies MonAn : _arraylistMonAn) {
+            for (MenuShow_VietnameseDelicacies MonAn : _arraylistMenu_VietnameseDelicacies) {
                 if (MonAn.get_MonAn().toLowerCase(Locale.getDefault()).contains(charText)) {
-                    _listMonAn.add(MonAn);
+                    _listMenu_VietnameseDelicacies.add(MonAn);
                 }
             }
         }

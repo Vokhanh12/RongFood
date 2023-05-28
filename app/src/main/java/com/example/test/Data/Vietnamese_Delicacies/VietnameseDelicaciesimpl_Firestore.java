@@ -5,8 +5,6 @@ import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import com.example.test.Model.Location;
-import com.example.test.Model.MonAn_VietnameseDelicacies;
-import com.example.test.Model.Store;
 import com.example.test.Model.VietnameseDelicacies;
 import com.google.android.gms.tasks.*;
 import com.google.firebase.firestore.*;
@@ -16,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 
 public class VietnameseDelicaciesimpl_Firestore implements VietnameseDelicaciesDao {

@@ -2,7 +2,6 @@ package com.example.test.Presentation.DashbroadShop;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 
@@ -13,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test.Data.StoreDAO.DocumentIdCallback;
@@ -24,17 +22,10 @@ import com.example.test.Model.Store;
 import com.example.test.Model.VietnameseDelicacies;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterIcon;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterImage;
-import com.example.test.Presentation.Dashbroad.SeachView.SeachViewMonAn_VietnameseDilicacies_Store;
-import com.example.test.Presentation.DashbroadMap.DashbroadMapActivity;
+import com.example.test.Presentation.Dashbroad.SeachView.Show_VietnameseDilicacies_Store;
 import com.example.test.Presentation.DashbroadShop.BuyShop.BuyShopActivity;
-import com.example.test.Presentation.DashbroadShop.RecycleView.GridSpacingItemDecoration;
-import com.example.test.Presentation.DashbroadShop.RecycleView.VerticalSpaceItemDecoration;
-import com.example.test.Presentation.Store.BuyFood.BuyFoodActivity;
-import com.example.test.Presentation.Store.MenuActivity;
-import com.example.test.Presentation.Store.RecyclerView.NotificationActivity;
 import com.example.test.R;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -102,12 +93,10 @@ public class DashbroadShopActivity extends AppCompatActivity {
                         Toast.makeText(DashbroadShopActivity.this, "icon 2", Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
-                        Intent intent3 = new Intent(DashbroadShopActivity.this, BuyFoodActivity.class);
-                        startActivity(intent3);
+
                         break;
                     case 3:
-                        Intent intent4 = new Intent(DashbroadShopActivity.this, NotificationActivity.class);
-                        startActivity(intent4);
+
                         break;
 
                 }
@@ -193,7 +182,7 @@ public class DashbroadShopActivity extends AppCompatActivity {
         }
 
 
-        SeachViewMonAn_VietnameseDilicacies_Store seachViewMonAn_vietnameseDilicacies_store = new SeachViewMonAn_VietnameseDilicacies_Store(DashbroadShopActivity.this, lvSearch, etSearch);
+        Show_VietnameseDilicacies_Store seachViewMonAn_vietnameseDilicacies_store = new Show_VietnameseDilicacies_Store(DashbroadShopActivity.this, lvSearch, etSearch);
 
         etSearch.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
