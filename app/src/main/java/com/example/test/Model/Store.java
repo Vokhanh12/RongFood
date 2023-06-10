@@ -15,12 +15,12 @@ public class Store implements Parcelable {
     private LinkedList<VietnameseDelicacies> _llMenu;
 
 
-    public Store(String MaCH,String NguoiSoHu,String TenCH,Location location,LinkedList<VietnameseDelicacies> llMenu){
-        this._MaCH=MaCH;
-        this._NguoiSoHu=NguoiSoHu;
-        this._TenCH=TenCH;
-        this._Location=location;
-        this._llMenu=llMenu;
+    public Store(String MaCH, String NguoiSoHu, String TenCH, Location location, LinkedList<VietnameseDelicacies> llMenu) {
+        this._MaCH = MaCH;
+        this._NguoiSoHu = NguoiSoHu;
+        this._TenCH = TenCH;
+        this._Location = location;
+        this._llMenu = llMenu;
     }
 
 
@@ -81,6 +81,7 @@ public class Store implements Parcelable {
     public String getTenCH() {
         return _TenCH;
     }
+
     public void set_location(Location Location) {
         this._Location = _Location;
     }
@@ -118,3 +119,5 @@ public class Store implements Parcelable {
         return _llMenu;
     }
 }
+
+

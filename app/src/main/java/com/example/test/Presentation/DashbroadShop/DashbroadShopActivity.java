@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,7 @@ import com.example.test.Model.Store;
 import com.example.test.Model.VietnameseDelicacies;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterIcon;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterImage;
-import com.example.test.Presentation.Dashbroad.SeachView.Show_VietnameseDilicacies_Store;
+import com.example.test.Presentation.Dashbroad.SeachView.Show_VietnameseDelicacies_Store;
 import com.example.test.Presentation.DashbroadShop.BuyShop.BuyShopActivity;
 import com.example.test.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,7 +48,7 @@ public class DashbroadShopActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashbroad_main);
+        setContentView(R.layout.activity_dashbroad_shop);
 
 
 
@@ -182,9 +183,9 @@ public class DashbroadShopActivity extends AppCompatActivity {
         }
 
 
-        Show_VietnameseDilicacies_Store seachViewMonAn_vietnameseDilicacies_store = new Show_VietnameseDilicacies_Store(DashbroadShopActivity.this, lvSearch, etSearch);
+        Show_VietnameseDelicacies_Store seachViewMonAn_vietnameseDilicacies_store = new Show_VietnameseDelicacies_Store(DashbroadShopActivity.this, lvSearch, etSearch);
 
-        etSearch.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+        etSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {

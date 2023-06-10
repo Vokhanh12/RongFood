@@ -5,6 +5,7 @@ import android.graphics.drawable.Icon;
 import android.os.Bundle;
 
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import com.example.test.MainActivity;
 import com.example.test.Model.ShopView;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterIcon;
 import com.example.test.Presentation.Dashbroad.RecycleView.MyAdapterImage;
-import com.example.test.Presentation.Dashbroad.SeachView.Show_VietnameseDilicacies_Store;
+import com.example.test.Presentation.Dashbroad.SeachView.Show_VietnameseDelicacies_Store;
 import com.example.test.R;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class DashbroadActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashbroad_main);
+        setContentView(R.layout.activity_dashbroad_shop);
 
         lvSearch = findViewById(R.id.listnameFood);
         etSearch = findViewById(R.id.search);
@@ -106,16 +107,14 @@ public class DashbroadActivity extends AppCompatActivity {
 
 
         //Đưa danh sách VietnameseDelicacies dùng hiển thị dữ liệu ảo cho SearchView
-        Show_VietnameseDilicacies_Store seachViewMonAn_vietnameseDilicacies_store = new Show_VietnameseDilicacies_Store(DashbroadActivity.this,lvSearch,etSearch);
+        Show_VietnameseDelicacies_Store seachViewMonAn_vietnameseDilicacies_store = new Show_VietnameseDelicacies_Store(DashbroadActivity.this,lvSearch,etSearch);
 
-        etSearch.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+        etSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                  lvSearch.setVisibility(View.VISIBLE);
-                }
-                else
-                {
+                if (hasFocus) {
+                    lvSearch.setVisibility(View.VISIBLE);
+                } else {
                     lvSearch.setVisibility(View.GONE);
                 }
             }

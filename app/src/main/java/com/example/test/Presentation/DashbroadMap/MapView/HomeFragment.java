@@ -1,4 +1,4 @@
-package com.example.test.Presentation.DashbroadMap;
+package com.example.test.Presentation.DashbroadMap.MapView;
 
 import android.view.LayoutInflater;
 import android.view.View;

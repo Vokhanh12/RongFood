@@ -44,23 +44,22 @@
                     app:iconifiedByDefault="false"
                     app:queryBackground="@null"
                     app:submitBackground="@null"
-                    app:queryHint="Tìm kiếm xung quanh" />
+                    app:queryHint="Tìm kiếm xung quanh aaaaaa" />
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_viewImage"
                     android:layout_width="match_parent"
-                    android:layout_height="549dp"
+                    android:layout_height="wrap_content"
                     android:clipToPadding="false"
-                    android:paddingStart="0dp"
-                    android:paddingEnd="0dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:overScrollMode="always"
-                    android:orientation="vertical"
-                    app:spanCount="2"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginEnd="-5dp"
-                    android:layout_marginTop="53dp"
-                    android:nestedScrollingEnabled="true"/>
+                    android:orientation="horizontal"
+                    app:spanCount="4"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_alignParentEnd="true" android:layout_alignParentTop="true"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginTop="55dp"/>
+
             <ListView
                     android:id="@+id/listnameFood"
                     android:layout_width="match_parent"

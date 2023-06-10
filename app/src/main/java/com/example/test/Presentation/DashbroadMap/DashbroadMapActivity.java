@@ -24,6 +24,9 @@ import com.example.test.Data.Vietnamese_Delicacies.VietnameseDelicaciesimpl_Fire
 import com.example.test.Functionality.Functionality;
 import com.example.test.Model.Store;
 import com.example.test.Model.VietnameseDelicacies;
+import com.example.test.Presentation.DashbroadMap.MapView.CustomOverlayItem;
+import com.example.test.Presentation.DashbroadMap.MapView.HomeFragment;
+import com.example.test.Model.Model_DashbroadMap.useMapView.dbMap;
 import com.example.test.Presentation.DashbroadShop.DashbroadShopActivity;
 import com.example.test.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,7 +44,6 @@ import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.OverlayItem;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -453,7 +455,7 @@ public class DashbroadMapActivity extends AppCompatActivity implements LocationL
                 com.example.test.Model.Location locationEnd = new com.example.test.Model.Location(LocationEnd.getLatitude(), LocationEnd.getLongitude());
                 Log.d(TAG, "" + locationEnd.getLatitude());
                 Log.d(TAG, "" + locationEnd.getLongitude());
-                MapDashbroad mapDashbroad = new MapDashbroad(locationStart, locationEnd, DashbroadMapActivity.this, map);
+                dbMap mapDashbroad = new dbMap(locationStart, locationEnd, DashbroadMapActivity.this, map);
                 //Find way
                 mapDashbroad.Findway();
 

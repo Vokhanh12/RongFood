@@ -9,8 +9,8 @@ import androidx.appcompat.widget.SearchView;
 
 import com.example.test.Data.StoreDAO.StoreDAOimpl_Firestore;
 import com.example.test.Data.Vietnamese_Delicacies.VietnameseDelicaciesimpl_Firestore;
-import com.example.test.Model.SearchViewModel_Dashbroad.MenuShow_Store;
-import com.example.test.Model.SearchViewModel_Dashbroad.MenuShow_VietnameseDelicacies;
+import com.example.test.Model.Model_Dashbroad.useSearchView.MenuShow_Store;
+import com.example.test.Model.Model_Dashbroad.useSearchView.MenuShow_VietnameseDelicacies;
 import com.example.test.Model.Store;
 import com.example.test.Model.VietnameseDelicacies;
 import com.example.test.Presentation.Dashbroad.ListView.ListViewApdapterSearch_Store;
@@ -30,19 +30,11 @@ public class Show_VietnameseDelicacies_Store {
     LayoutInflater _inflater;
 
     ListViewApdapterSearch_VietnameseDelicacies adapterVietnameseDelicacies;
-
     ListViewApdapterSearch_Store adapterStore;
-
     ListView _listViewSearch;
-
     SearchView _editsearch;
 
-    private List<String> listDocumentIds = new ArrayList<>();
-
-    private String[] MonAn;
-    private List<MenuShow_VietnameseDelicacies> _listMonAn = null;
     private ArrayList<MenuShow_VietnameseDelicacies> _arrlistMonAn = new ArrayList<>();
-
     private ArrayList<MenuShow_Store> _arrlist_MonAn_TenCuaHang = new ArrayList<>();
 
     public Show_VietnameseDelicacies_Store(Context context, ListView listViewSearch, SearchView editSearch) {
@@ -87,13 +79,25 @@ public class Show_VietnameseDelicacies_Store {
                             vietnameseDelicaciesTasks.add(vietnameseDelicaciesTask);
                         }
 
-                        // Kết hợp tất cả các tác vụ lấy dữ liệu và đợi tất cả hoàn thành
-                        Tasks.whenAllComplete((Task<?>) storeTasks, (Task<?>) vietnameseDelicaciesTasks)
+                        List<Task<?>> allTasks = new ArrayList<>();
+                        allTasks.addAll(storeTasks);
+                        allTasks.addAll(vietnameseDelicaciesTasks);
+
+                        Tasks.whenAllComplete(allTasks)
                                 .addOnSuccessListener(new OnSuccessListener<List<Task<?>>>() {
                                     @Override
                                     public void onSuccess(List<Task<?>> tasks) {
                                         for (Task<?> task : tasks) {
                                             if (task.isSuccessful()) {
+                                                if (task.getResult() instanceof VietnameseDelicacies) {
+                                                    VietnameseDelicacies vietnameseDelicacies = (VietnameseDelicacies) task.getResult();
+
+                                                    // Thêm Món ăn vào ArrayList
+                                                    if (containsSearchText(vietnameseDelicacies.get_TenMon())) {
+                                                        _arrlistMonAn.add(new MenuShow_VietnameseDelicacies(vietnameseDelicacies.get_TenMon()));
+                                                    }
+                                                }
+
                                                 if (task.getResult() instanceof Store) {
                                                     Store store = (Store) task.getResult();
 
@@ -111,13 +115,6 @@ public class Show_VietnameseDelicacies_Store {
                                                             _arrlist_MonAn_TenCuaHang.add(new MenuShow_Store(vietnameseDelicacies.get_TenMon(), "NameFood"));
                                                         }
                                                     }
-                                                } else if (task.getResult() instanceof VietnameseDelicacies) {
-                                                    VietnameseDelicacies vietnameseDelicacies = (VietnameseDelicacies) task.getResult();
-
-                                                    // Thêm Món ăn vào ArrayList
-                                                    if (containsSearchText(vietnameseDelicacies.get_TenMon())) {
-                                                        _arrlistMonAn.add(new MenuShow_VietnameseDelicacies(vietnameseDelicacies.get_TenMon()));
-                                                    }
                                                 }
                                             } else {
                                                 Log.e(Tag, "Error retrieving data: " + task.getException());
@@ -125,12 +122,11 @@ public class Show_VietnameseDelicacies_Store {
                                         }
 
                                         // Đưa ArrayList vào Adapter
-                                        if (_arrlist_MonAn_TenCuaHang.size() > 0) {
-                                            adapterStore = new ListViewApdapterSearch_Store(_mContext, _arrlist_MonAn_TenCuaHang);
-                                            _listViewSearch.setAdapter(adapterStore);
-                                        } else if (_arrlistMonAn.size() > 0) {
+                                        if (_arrlistMonAn.size() > 0 && _arrlist_MonAn_TenCuaHang.size() > 0) {
                                             adapterVietnameseDelicacies = new ListViewApdapterSearch_VietnameseDelicacies(_mContext, _arrlistMonAn);
-                                            _listViewSearch.setAdapter(adapterVietnameseDelicacies);
+                                            adapterStore = new ListViewApdapterSearch_Store(_mContext, _arrlist_MonAn_TenCuaHang);
+                                            CombinedAdapter combinedAdapter = new CombinedAdapter(adapterStore, adapterVietnameseDelicacies);
+                                            _listViewSearch.setAdapter(combinedAdapter);
                                         }
                                     }
                                 });

@@ -1,4 +1,4 @@
-package com.example.test.Model.SearchViewModel_Dashbroad;
+package com.example.test.Model.Model_Dashbroad.useSearchView;
 
 public class MenuShow_Store {
 
@@ -6,7 +6,7 @@ public class MenuShow_Store {
     private String _tenCuaHang;
 
     public MenuShow_Store(String NameMenu ,String type){
-        if(type.equals("FoodName"))
+        if(type.equals("NameFood"))
             this._tenMonAn = NameMenu;
         else if(type.equals("NameStore"))
             this._tenCuaHang = NameMenu;

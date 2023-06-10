@@ -34,24 +34,12 @@
                 android:name=".Presentation.Store.ListView.ListViewAdapterSearchMenu"
                 android:exported="false"/>
         <activity
-                android:name=".Presentation.Store.BuyFood.BuyFoodActivity"
-                android:exported="false"/>
-        <activity
-                android:name=".Presentation.Store.ListView.ButtonListAdapterActivity"
-                android:exported="false"/>
-        <activity
-                android:name=".Presentation.Store.RecyclerView.NotificationActivity"
-                android:exported="false"/>
-        <activity
-                android:name=".Presentation.Store.MenuActivity"
-                android:exported="false"/>
-        <activity
                 android:name=".Presentation.Dashbroad.DashbroadActivity"
                 android:exported="false"
                 android:label="helloworld"
                 android:theme="@style/Theme.Test.FullScreen.NoActionBar"/>
         <activity
-                android:name=".Presentation.DashbroadMap.HomeFragment"
+                android:name=".Presentation.DashbroadMap.MapView.HomeFragment"
                 android:exported="false">
             <meta-data
                     android:name="android.app.lib_name"

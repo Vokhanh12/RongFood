@@ -1,4 +1,4 @@
-package com.example.test.Presentation.DashbroadMap;
+package com.example.test.Model.Model_DashbroadMap.useMapView;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -12,9 +12,8 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Polyline;
 
 import java.util.ArrayList;
-import java.util.Map;
 
-public class MapDashbroad {
+public class dbMap {
 
     private Location locationStart;
 
@@ -26,7 +25,7 @@ public class MapDashbroad {
 
     private MapView map;
 
-    public MapDashbroad(Location locationFrist, Location locationSecord, Context mContex, MapView map) {
+    public dbMap(Location locationFrist, Location locationSecord, Context mContex, MapView map) {
         this.locationStart = locationFrist;
         this.locationEnd = locationSecord;
         this.mContex = mContex;

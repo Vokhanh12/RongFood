@@ -1,4 +1,4 @@
-package com.example.test.Presentation.DashbroadMap;
+package com.example.test.Presentation.DashbroadMap.MapView;
 
 import com.example.test.Model.Store;
 import org.osmdroid.util.GeoPoint;

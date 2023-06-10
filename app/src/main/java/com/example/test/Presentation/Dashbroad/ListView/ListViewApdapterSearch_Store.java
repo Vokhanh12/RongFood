@@ -6,8 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.example.test.Model.SearchViewModel_Dashbroad.MenuShow_Store;
-import com.example.test.Model.SearchViewModel_Dashbroad.MenuShow_VietnameseDelicacies;
+import com.example.test.Model.Model_Dashbroad.useSearchView.MenuShow_Store;
 import com.example.test.R;
 
 import java.util.ArrayList;
